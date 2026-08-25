@@ -153,15 +153,15 @@ Use your built-in skill installer. Install only skills/hgm-web-app and confirm i
             </p>
             <div className="flex flex-wrap gap-3">
               <Button asChild size="lg">
-                <a href={`${downloadBase}/hgm-web-app.zip`} download>
-                  <Download data-icon="inline-start" />
-                  Download skill
+                <a href="#install">
+                  Paste this into your coding agent
+                  <ArrowRight data-icon="inline-end" />
                 </a>
               </Button>
               <Button asChild size="lg" variant="outline">
-                <a href="#workflow">
-                  See how it works
-                  <ArrowRight data-icon="inline-end" />
+                <a href={`${downloadBase}/hgm-web-app.zip`} download>
+                  <Download data-icon="inline-start" />
+                  Download skill
                 </a>
               </Button>
             </div>
