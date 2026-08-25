@@ -1,0 +1,4 @@
+interface:
+  display_name: "HGM Web App"
+  short_description: "Build, secure, and review approved HGM apps"
+  default_prompt: "Use $hgm-web-app to deliver the technical work for these approved HGM app requirements."
