@@ -73,6 +73,12 @@ The technical-planning skill translates those approved answers into controls and
 - [Supabase MCP and Postgres workflow](docs/supabase-mcp-and-postgres.md)
 - [Delivery and operations](docs/delivery-and-operations.md)
 - [Brandlens worked example](examples/brandlens/README.md)
+- Plain-language skill documentation:
+  - [`hgm-web-app`: workflow coordinator](docs/skills/hgm-web-app.md)
+  - [`scope-hgm-web-app`: technical planner](docs/skills/scope-hgm-web-app.md)
+  - [`build-hgm-web-app`: non-production builder](docs/skills/build-hgm-web-app.md)
+  - [`secure-hgm-supabase`: data and access specialist](docs/skills/secure-hgm-supabase.md)
+  - [`review-hgm-web-app`: independent reviewer](docs/skills/review-hgm-web-app.md)
 
 Copy-ready working documents are in [`templates/`](templates/):
 

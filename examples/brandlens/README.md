@@ -35,6 +35,14 @@ HGM skills are reusable instructions for the coding assistant. They kept the bui
 5. Browser acceptance tooling checked the real journey, mobile and desktop layout, keyboard use, page structure, links and browser errors.
 6. `review-hgm-web-app` defines the next independent review. It has not been run, so this example does not claim Brandlens is ready for production.
 
+Detailed plain-language documentation is available for each skill:
+
+- [`hgm-web-app`: workflow coordinator](../../docs/skills/hgm-web-app.md)
+- [`scope-hgm-web-app`: technical planner](../../docs/skills/scope-hgm-web-app.md)
+- [`build-hgm-web-app`: non-production builder](../../docs/skills/build-hgm-web-app.md)
+- [`secure-hgm-supabase`: data and access specialist](../../docs/skills/secure-hgm-supabase.md)
+- [`review-hgm-web-app`: independent reviewer](../../docs/skills/review-hgm-web-app.md)
+
 ## What happens during a scan
 
 1. Find likely public pages that mention the brand.

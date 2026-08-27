@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router"
 import {
   ArrowLeft,
   Bot,
+  BookOpenCheck,
   CheckCircle2,
   CirclePause,
   Code2,
@@ -67,31 +68,87 @@ const technology = [
   ],
 ] as const
 
-const buildSteps = [
-  [
-    "Start with an approved brief",
-    "The team agreed what Brandlens should do, who could use it, what data it could keep and what was outside the first release.",
-  ],
-  [
-    "Use the HGM web-app playbook",
-    "The hgm-web-app skill kept the work in the right order: plan, build, secure, prove and then stop for human review.",
-  ],
-  [
-    "Build away from the live service",
-    "The build-hgm-web-app skill kept changes on a feature branch and connected the local app only to an approved test environment.",
-  ],
-  [
-    "Protect staff access and data",
-    "The secure-hgm-supabase skill and official Supabase guidance checked sign-in, manager and viewer access, private credentials and background work.",
-  ],
-  [
-    "Run a real public-source example",
-    "Halliday Wine Companion was used as the approved test brand. The team followed the scan until all background work finished and the totals could be checked.",
-  ],
-  [
-    "Stop before release",
-    "The review-hgm-web-app skill defines the next independent check. It has not been run, so the example does not claim the app is ready for production.",
-  ],
+const skillGuides = [
+  {
+    name: "hgm-web-app",
+    title: "Keeps the whole workflow in the right order",
+    stage: "All stages",
+    summary:
+      "The master skill is the single starting point. It identifies whether the app needs planning, building, security work, review or a human release decision.",
+    startsWith:
+      "Approved requirements, named owners, safety boundaries and authority for the current stage.",
+    delivers:
+      "The correct next step, the evidence needed and a clear handoff to the person who must decide next.",
+    brandlens:
+      "It routed Brandlens into Build, required extra staging proof for sign-in, queues and AI, and stopped before release.",
+    boundary:
+      "It does not invent the app, approve requirements or turn one approval into permission for later stages.",
+    document: "hgm-web-app",
+  },
+  {
+    name: "scope-hgm-web-app",
+    title: "Turns an approved idea into a build-ready plan",
+    stage: "Technical planning",
+    summary:
+      "Scope converts the approved product requirements into an HGM Technical Brief without changing code, accounts or systems.",
+    startsWith:
+      "The approved users, workflows, data, acceptance criteria, non-goals and AI safety boundaries.",
+    delivers:
+      "A plan covering access, environments, data, integrations, tests, risks, operations and required approvals.",
+    brandlens:
+      "It defined manager and viewer roles, the 30-day baseline, daily monitoring, visible failures, cost limits and disabled schedules.",
+    boundary:
+      "It does not choose features or start building. Missing product decisions go back to the product owner.",
+    document: "scope-hgm-web-app",
+  },
+  {
+    name: "build-hgm-web-app",
+    title: "Builds and proves the test version",
+    stage: "Non-production build",
+    summary:
+      "Build implements only the approved brief on a feature branch and an isolated test environment.",
+    startsWith:
+      "An approved Technical Brief, explicit build authority, exact test targets and prepared test data.",
+    delivers:
+      "A working test version with automated checks, browser evidence, denied cases and a record of unresolved risks.",
+    brandlens:
+      "It created the portfolio, brand views and monitoring workflow while preserving the earlier one-off scanner.",
+    boundary:
+      "It does not use production data, activate live schedules, merge its own work or call a passing build complete evidence.",
+    document: "build-hgm-web-app",
+  },
+  {
+    name: "secure-hgm-supabase",
+    title: "Protects staff access, data and background work",
+    stage: "Supabase security",
+    summary:
+      "Secure puts the real permissions at the database and server boundaries so they cannot be bypassed in the browser.",
+    startsWith:
+      "The approved roles, the exact test project, official Supabase guidance and narrowly scoped MCP access.",
+    delivers:
+      "Enforced access rules, safe server functions, reliable queues, versioned changes and allowed and denied test results.",
+    brandlens:
+      "It limited reads to active staff, changes to managers, kept AI credentials server-side and prevented duplicate daily work.",
+    boundary:
+      "The MCP is development access, not permission. Production changes and schedule activation still need separate approval.",
+    document: "secure-hgm-supabase",
+  },
+  {
+    name: "review-hgm-web-app",
+    title: "Checks the evidence independently",
+    stage: "Read-only review",
+    summary:
+      "Review compares the exact change and preview with the approved plan, then gives Green, Amber or Red advice.",
+    startsWith:
+      "The approved brief, exact commit and preview, test backend, migration plan and evidence from named owners.",
+    delivers:
+      "A plain-language recommendation with blockers, required actions, owners and remaining human decisions.",
+    brandlens:
+      "It has not yet run. Brandlens therefore remains a successful test version, not a production-ready app.",
+    boundary:
+      "It remains read-only and cannot fix, merge, deploy, change access or make the final release decision.",
+    document: "review-hgm-web-app",
+  },
 ] as const
 
 const informationFlow = [
@@ -262,34 +319,67 @@ export function BrandlensCaseStudyPage() {
           <div className="section-shell flex flex-col gap-8">
             <div>
               <h2 className="text-3xl font-semibold tracking-tight">
-                How the build was managed
+                What each HGM skill does
               </h2>
               <p className="mt-2 max-w-3xl text-muted-foreground">
                 HGM skills are reusable instructions for the coding assistant.
-                They kept decisions, testing and approval points consistent.
+                Each one has a specific job, required inputs, evidence and a
+                point where a person must decide what happens next.
               </p>
             </div>
-            <ol
-              className="grid gap-4 md:grid-cols-2"
-              aria-label="Brandlens build steps"
-            >
-              {buildSteps.map(([title, text], index) => (
-                <li key={title}>
-                  <Card className="h-full" size="sm">
+            <ol className="flex flex-col gap-5" aria-label="HGM web-app skills">
+              {skillGuides.map((skill, index) => (
+                <li key={skill.name} id={skill.name} className="scroll-mt-24">
+                  <Card>
                     <CardHeader>
-                      <div className="flex items-center justify-between gap-4">
-                        <CheckCircle2
-                          className="size-5 text-primary"
-                          aria-hidden="true"
-                        />
-                        <span className="font-mono text-xs text-muted-foreground">
-                          0{index + 1}
-                        </span>
+                      <div className="flex flex-wrap items-center gap-2">
+                        <Badge>Skill {index + 1} of 5</Badge>
+                        <Badge variant="outline">{skill.stage}</Badge>
                       </div>
-                      <CardTitle>{title}</CardTitle>
+                      <CardTitle>{skill.title}</CardTitle>
+                      <CardDescription>
+                        <code>{skill.name}</code> · {skill.summary}
+                      </CardDescription>
                     </CardHeader>
-                    <CardContent>
-                      <CardDescription>{text}</CardDescription>
+                    <CardContent className="flex flex-col gap-6">
+                      <dl className="grid gap-5 md:grid-cols-2">
+                        <div>
+                          <dt className="font-semibold">What it starts with</dt>
+                          <dd className="mt-1 text-sm leading-6 text-muted-foreground">
+                            {skill.startsWith}
+                          </dd>
+                        </div>
+                        <div>
+                          <dt className="font-semibold">What it delivers</dt>
+                          <dd className="mt-1 text-sm leading-6 text-muted-foreground">
+                            {skill.delivers}
+                          </dd>
+                        </div>
+                        <div>
+                          <dt className="font-semibold">
+                            What it did for Brandlens
+                          </dt>
+                          <dd className="mt-1 text-sm leading-6 text-muted-foreground">
+                            {skill.brandlens}
+                          </dd>
+                        </div>
+                        <div>
+                          <dt className="font-semibold">Where it must stop</dt>
+                          <dd className="mt-1 text-sm leading-6 text-muted-foreground">
+                            {skill.boundary}
+                          </dd>
+                        </div>
+                      </dl>
+                      <Button asChild className="w-fit" variant="outline">
+                        <a
+                          href={`${repositoryUrl}/blob/main/docs/skills/${skill.document}.md`}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          <BookOpenCheck data-icon="inline-start" />
+                          Read full skill documentation
+                        </a>
+                      </Button>
                     </CardContent>
                   </Card>
                 </li>
