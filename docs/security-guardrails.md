@@ -10,6 +10,8 @@ These are minimum controls for AI-assisted HGM web applications. Apply them in a
 - Route guards and hidden controls improve user experience; they do not secure data or privileged operations.
 - Express permissions as specific actions and resources. Fail closed when membership, tenant, role, or configuration is missing.
 - Test authorization directly against the Data API, Storage, and Edge Function boundary.
+- Verify provider enablement, public signup, invitation or enrollment, application membership, recovery, SMTP, password policy, and removal as separate controls. Do not infer one from another.
+- Record any approved identity or architecture exception with an owner, rationale, compensating controls, approval evidence, and review date.
 
 ## Database and Data API
 
@@ -26,11 +28,22 @@ These are minimum controls for AI-assisted HGM web applications. Apply them in a
 
 - React may receive only browser-safe publishable configuration.
 - Never place a Supabase secret or service-role key, third-party credential, signing secret, or deployment credential in client code, public build variables, logs, examples, or screenshots.
+- Never repeat or commit a credential pasted into chat or another inappropriate surface. Treat it as exposed, request owner-led rotation, and store only the replacement in approved server-side secret storage.
 - Keep application secrets in scoped Supabase Edge Function secrets and delivery credentials in scoped Netlify settings.
 - Use Edge Functions for third-party APIs, webhooks, billing, bulk exports, administrative actions, quotas, and privileged database access.
 - Validate authentication, authorization, method, content type, size, schema, and business rules at the function boundary.
 - Verify webhook signatures before processing, make retries idempotent, and reject duplicates safely.
 - Return specific but non-sensitive errors. Do not silently continue after a failed security assumption.
+- Give the user a safe, actionable next step and include non-sensitive correlation data so an operator can find the matching server event.
+
+## Queues and scheduled work
+
+- Size batches from the available runtime budget and measured work duration.
+- Persist durable checkpoints before acknowledging queue work.
+- Use visibility timeouts longer than expected processing and make any renewal explicit and bounded.
+- Limit retries, record attempts, and expose exhausted work as an actionable terminal failure.
+- Make dispatch, continuation, and side effects idempotent so an interruption or replay cannot duplicate results.
+- Verify queue drainage, terminal outcomes, duplicate prevention, schedule state, cost controls, and visible coverage failures from the declared target.
 
 ## Storage
 
@@ -93,6 +106,7 @@ These are minimum controls for AI-assisted HGM web applications. Apply them in a
 - Do not log access tokens, cookies, credentials, full personal records, uploaded documents, or unnecessary request bodies.
 - Use stable request or correlation identifiers for diagnosis.
 - Make sensitive user-facing errors useful without exposing internal implementation details.
+- Name the evidence owner, exact target, observation time, and source for every material security-verification claim.
 
 ## Safety boundaries for AI
 
