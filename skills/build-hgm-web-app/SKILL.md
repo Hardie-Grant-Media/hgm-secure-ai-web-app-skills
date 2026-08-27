@@ -18,6 +18,7 @@ Before changing anything:
 5. Stop if the technical brief is missing, unapproved, conflicts with repository rules, or requires an unresolved product or permission decision.
 6. For any Supabase work, apply the official `supabase` skill. For SQL, schema, RLS, indexes, connections, locking, data access, or query-performance work, also apply `supabase-postgres-best-practices`.
 7. Confirm the Supabase MCP is scoped to the exact approved development project and follow [the MCP workflow](../../docs/supabase-mcp-and-postgres.md).
+8. When the build includes Auth, Supabase mutations, Edge Functions, queues, schedules, external AI, or browser acceptance, follow [the staging-proof loop](../hgm-web-app/references/staging-proof.md) as part of this Build stage.
 
 ## Work within the approved architecture
 
@@ -44,6 +45,7 @@ When Supabase schema, Auth, RLS, Storage, or Edge Functions are involved, apply 
 - Do not add speculative features, fallbacks, abstractions, services, roles, permissions, or release paths.
 - Do not use production data, credentials, schedules, webhooks, messages, payments, or integrations in preview.
 - Never expose a secret or service-role key to React, logs, examples, or screenshots.
+- Never repeat or commit a credential pasted into chat or another inappropriate surface. Treat it as exposed, require owner-led rotation, and put only the replacement in approved server-side secret storage.
 - Never weaken RLS, use user-editable metadata for authorization, or make a function privileged merely to bypass a permission error.
 - Fail clearly when an assumption is broken. Do not silently continue or invent a default.
 
@@ -64,6 +66,8 @@ Run the repository's proportionate checks, including as applicable:
 
 Verify the exact Netlify preview and its declared non-production Supabase target. A passing build alone is not acceptance evidence.
 
+For staging work, independently read back the expected database objects, Auth controls, memberships, functions, queues, and schedule state from the declared target. Exercise the approved canary in a real browser, follow asynchronous work to a terminal state, and replay an idempotent operation. A deployment command, dashboard visit, screenshot, or queued job is not proof of working behavior.
+
 ## Stop points
 
 Stop before:
@@ -83,6 +87,7 @@ Report:
 - current branch, commit if available, preview URL, and non-production Supabase target
 - MCP project reference, mode, enabled feature groups, and Postgres best-practice categories applied
 - checks run and observable results
+- staging readback, canary, terminal async state, queue drainage, idempotent replay, and evidence owners when staging proof applies
 - allowed and denied cases verified
 - deviations, unresolved risks, and assumptions
 - human decisions and release steps still required

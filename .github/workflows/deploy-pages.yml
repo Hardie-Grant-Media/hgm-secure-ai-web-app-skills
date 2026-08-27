@@ -6,6 +6,12 @@ on:
     paths:
       - "website/**"
       - "skills/**"
+      - "examples/**"
+      - "docs/**"
+      - "templates/**"
+      - "tests/**"
+      - "scripts/**"
+      - "README.md"
       - ".github/workflows/deploy-pages.yml"
   workflow_dispatch:
 
@@ -49,6 +55,8 @@ jobs:
           (cd skills && zip -q -FS -r "../website/public/downloads/hgm-web-app.zip" "hgm-web-app")
           unzip -t website/public/downloads/hgm-web-app.zip
           unzip -p website/public/downloads/hgm-web-app.zip hgm-web-app/SKILL.md | cmp - skills/hgm-web-app/SKILL.md
+          unzip -p website/public/downloads/hgm-web-app.zip hgm-web-app/agents/openai.yaml | cmp - skills/hgm-web-app/agents/openai.yaml
+          unzip -p website/public/downloads/hgm-web-app.zip hgm-web-app/references/staging-proof.md | cmp - skills/hgm-web-app/references/staging-proof.md
 
       - name: Validate and build website
         working-directory: website

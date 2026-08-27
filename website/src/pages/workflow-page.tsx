@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { Link } from "@tanstack/react-router"
 import {
   ArrowRight,
   BookOpenCheck,
@@ -127,6 +128,7 @@ Use your built-in skill installer. Install only skills/hgm-web-app and confirm i
             <a href="#profiles">Access</a>
             <a href="#boundaries">AI rules</a>
             <a href="#technical">Technical</a>
+            <Link to="/examples/brandlens">Brandlens example</Link>
           </nav>
           <Button asChild size="sm" variant="ghost">
             <a href={repositoryUrl} target="_blank" rel="noreferrer">
@@ -163,6 +165,12 @@ Use your built-in skill installer. Install only skills/hgm-web-app and confirm i
                   <Download data-icon="inline-start" />
                   Download skill
                 </a>
+              </Button>
+              <Button asChild size="lg" variant="ghost">
+                <Link to="/examples/brandlens">
+                  Read implementation example
+                  <ArrowRight data-icon="inline-end" />
+                </Link>
               </Button>
             </div>
           </div>

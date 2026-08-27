@@ -49,6 +49,8 @@ The specialist skills remain available for a specific stage:
 5. Use [`review-hgm-web-app`](skills/review-hgm-web-app/SKILL.md) for an independent, read-only recommendation.
 6. A named human release authority decides whether to merge and release.
 
+See [the Brandlens worked example](examples/brandlens/README.md) for a sanitised golden path that reaches local and staging acceptance, then stops before Netlify, independent review, production, merge, or schedule activation.
+
 The skills do not approve production releases. They stop before production migrations, access changes, merges, and releases.
 
 ## Use approved safety boundaries
@@ -70,6 +72,7 @@ The technical-planning skill translates those approved answers into controls and
 - [Security guardrails](docs/security-guardrails.md)
 - [Supabase MCP and Postgres workflow](docs/supabase-mcp-and-postgres.md)
 - [Delivery and operations](docs/delivery-and-operations.md)
+- [Brandlens worked example](examples/brandlens/README.md)
 
 Copy-ready working documents are in [`templates/`](templates/):
 
@@ -77,6 +80,7 @@ Copy-ready working documents are in [`templates/`](templates/):
 - Review report
 - Threat and permission checklist
 - App-repository `AGENTS.md` guardrails
+- Staging canary report
 
 Use [the forward-test scenarios](tests/skill-scenarios.md) when changing a skill or shared guardrail. Final acceptance still requires one technical reviewer and one non-technical owner; an AI self-review is not a substitute.
 
@@ -116,6 +120,6 @@ The synced files under `sources/` are reference material and must not be changed
 
 ## Workflow website
 
-The plain-language workflow site lives in [`website/`](website/). It explains the lifecycle, safety boundaries, application profiles, master and specialist skills, Supabase controls, and human release decision without requiring a technical background.
+The plain-language workflow site lives in [`website/`](website/). It explains the lifecycle, safety boundaries, application profiles, master and specialist skills, Supabase controls, and human release decision without requiring a technical background. Its dedicated Brandlens case study is available at `/examples/brandlens` once GitHub Pages is published from the protected branch.
 
 GitHub Actions publishes the site to GitHub Pages from [`website/dist`](website/README.md). After pushing the repository to GitHub, select **GitHub Actions** in **Settings → Pages**; future changes under `website/` publish automatically from `main`.

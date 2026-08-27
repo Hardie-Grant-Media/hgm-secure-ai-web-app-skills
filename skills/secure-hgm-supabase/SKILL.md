@@ -47,12 +47,23 @@ Use the Supabase user ID as stable identity. Never authorize through email suffi
 
 - Internal apps use approved Entra SSO through Supabase SAML SSO and stable application membership.
 - Customer apps use the approved Supabase Auth enrollment, verification, recovery, and removal flow.
+- Verify provider enablement separately from public signup, invitation or enrollment, application membership, recovery, SMTP, password policy, and account removal. One enabled control does not prove another.
+- Record every approved architecture or identity exception with its owner, rationale, compensating controls, approval evidence, and review date.
 - Account for stale JWT claims when authorization relies on app metadata.
 - Use private Storage by default and scope object paths to the approved user or tenant relationship.
 - Test Storage creation and replacement separately because upsert requires insert, select, and update access.
 - Keep secrets and service-role keys out of the client.
 - Edge Functions must validate authentication, authorization, method, content type, size, schema, and business rules.
 - Verify webhook signatures, make retries idempotent, and bound rates, quotas, cost, pagination, files, and generated output.
+- Return safe, actionable client errors and attach non-sensitive correlation data that lets an operator find the matching server event.
+
+## Queues and schedules
+
+- Size queue batches against the available runtime budget rather than a nominal item count alone.
+- Persist durable checkpoints before acknowledging work, and use visibility timeouts longer than expected processing time.
+- Bound retries, record attempts, and make exhausted work a visible terminal failure with an actionable reason.
+- Make dispatch and processing idempotent so interrupted work can continue without duplicate records or side effects.
+- Verify terminal state, queue drainage, retry behavior, duplicate prevention, schedule state, and visible failure reporting from the exact target.
 
 ## Migrations and verification
 

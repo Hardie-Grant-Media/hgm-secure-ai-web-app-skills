@@ -28,6 +28,8 @@ Summarize whether the current commit and preview satisfy the approved requiremen
 - Netlify preview:
 - Allowed and denied test identities or fixtures:
 - Monitoring, recovery, and operational evidence:
+- Staging canary report and evidence owners:
+- Approved exception register:
 
 ## Findings
 
@@ -84,10 +86,14 @@ Confirm that browser route guards are not the only enforcement and that no autho
 - Monitoring and incident ownership:
 - Support and access review:
 - Human release authority and remaining stop points:
+- Required Netlify preview present: Yes / No
+- Independent evidence present: Yes / No
 
 ## Conditions for release decision
 
 List every blocker or condition that must be resolved before a named human decides whether to merge and release. If there are none, write `None`.
+
+Do not select `Green — Pass` when the required Netlify preview or independent evidence is absent.
 
 ## Human decisions still required
 

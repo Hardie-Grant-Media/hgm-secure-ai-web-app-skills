@@ -35,6 +35,16 @@ One person may hold more than one role where HGM permits it, but AI cannot be th
 
 The exact Supabase and Netlify target must be visible before migrations, function deployment, seed, restore, or release commands run.
 
+Record an environment manifest containing the repository, branch, exact environment and Supabase target, MCP mode, Auth and signup state, schedule state, external side-effect state, and evidence owner. Record approved architecture or identity exceptions with their owner, rationale, compensating controls, approval evidence, and review date.
+
+## Staging proof within Build
+
+When Auth, Supabase mutations, Edge Functions, queues, schedules, external AI, or browser acceptance are involved, complete [the staging-proof loop](../skills/hgm-web-app/references/staging-proof.md) and [staging canary report](../templates/staging-canary-report.md) during Build.
+
+Staging proof requires target readback and observable behavior. A successful migration or deployment command does not prove the expected objects or controls exist. A dashboard visit does not prove authorization, asynchronous completion, queue drainage, aggregation, duplicate prevention, or error visibility.
+
+For asynchronous work, size batches against runtime budgets, persist checkpoints, use suitable visibility timeouts, bound retries, and expose terminal failures. Follow the canary to a terminal state and replay one operation to prove idempotent continuation.
+
 ## Validation and preview
 
 GitHub checks should validate the change but must not create an undocumented second production release path. Proportionate checks include:
@@ -49,6 +59,8 @@ GitHub checks should validate the change but must not create an undocumented sec
 - project-scoped Supabase MCP verification and applicable Postgres best-practice checks
 
 The pull request must link the exact Netlify deploy preview and identify the non-production Supabase environment it uses. Acceptance must exercise the preview with allowed and denied identities, invalid input, empty states, dependency failures, and mobile or keyboard use where relevant.
+
+Staging acceptance may be completed before a Netlify preview exists, but it is not a release recommendation. Evidence must name its owner, exact target, observation time, and source. An independent reviewer must assess the current pull-request commit and exact required preview before a `Green — Pass` recommendation is available.
 
 ## Human release gate
 

@@ -68,11 +68,15 @@ Resolve technical details from the target repository and approved requirements. 
 
 Require an approved technical brief and explicit build authorization. Work only in a feature branch and approved non-production environment.
 
+When implementation includes Auth, Supabase mutations, Edge Functions, queues, schedules, external AI, or browser acceptance, read and follow [staging proof](references/staging-proof.md) within this Build stage. Do not invent another lifecycle stage.
+
 - Implement only the approved technical scope and safety boundaries.
 - Inspect the current project before adding routes, components, services, or packages.
 - Use synthetic data and non-production integrations.
 - Add allowed, unauthenticated, unauthorized, and cross-user or cross-tenant tests as relevant.
-- Record changed behavior, preview details, checks, deviations, and unresolved risks.
+- Declare the repository, branch, environment, exact Supabase target, MCP mode, schedule state, and external side-effect state before mutating staging.
+- Read back the target and exercise observable application behavior. A dashboard visit, successful deployment command, or green-looking screen is not proof.
+- Record changed behavior, evidence ownership, preview details, checks, deviations, and unresolved risks.
 
 Stop when the requirements, technical brief, target, identity, data use, permission, destructive change, or external side effect is unclear.
 

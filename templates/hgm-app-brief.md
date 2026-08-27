@@ -147,6 +147,19 @@ Copy the approved answers into this section. If they are missing, stop technical
 | Staging, if used |  |  |  | Staging |  |
 | Production |  |  |  | Production |  |
 
+### Environment manifest
+
+Complete this before any non-production mutation. Do not record secret values.
+
+- Repository and feature branch:
+- Exact local, preview, or staging environment:
+- Exact Supabase target:
+- Supabase MCP mode and enabled feature groups:
+- Auth provider and public-signup state:
+- Schedule state:
+- External side effects and their enabled or disabled state:
+- Evidence owner:
+
 ## 11. Acceptance tests
 
 ### Required behavior
@@ -179,6 +192,14 @@ Include at minimum unauthenticated access, authenticated-but-unauthorized access
 | Type | Item | Evidence or owner | Resolution or review date |
 | --- | --- | --- | --- |
 | Risk / Assumption / Decision |  |  |  |
+
+### Exception register
+
+Record every approved deviation from the architecture, identity, security, or delivery baseline. `None` is a valid answer.
+
+| Exception | Owner | Rationale | Compensating controls | Approval evidence | Review date |
+| --- | --- | --- | --- | --- | --- |
+|  |  |  |  |  |  |
 
 ## 14. Approval
 

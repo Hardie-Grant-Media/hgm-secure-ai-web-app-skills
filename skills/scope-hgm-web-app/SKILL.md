@@ -28,6 +28,7 @@ Determine from supplied context and read-only evidence:
 - accessibility, public discoverability, retention, support, and retirement needs
 - existing systems or patterns that should be reused
 - plain-language safety boundaries: what the AI may change, must protect, must not do, and when it must stop
+- an environment manifest and any approved architecture or identity exceptions, including owner, rationale, compensating controls, and review date
 
 Resolve technical facts from the repository before asking the user. Ask only for technical decisions that materially affect architecture, risk, identity, data use, or delivery. Return unresolved product decisions to the product owner without proposing features or alternatives.
 
