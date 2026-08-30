@@ -1,40 +1,23 @@
 # Building Brandlens with AI
 
-Brandlens tracks how brands are discussed online. HGM used AI to plan, build and test the app while people controlled the scope, access and release decisions.
+Brandlens tracks how brands are discussed online. This case study shows HGM teams how an approved idea became a working app with AI while people retained control of scope, access and release.
 
 This sanitised case study excludes credentials, private project details, source passages, private URLs and raw AI responses.
 
-## The AI development process
+## Why this case study exists
+
+The case study gives HGM staff and executives a concrete example of AI-assisted development. It shows where people made decisions, what AI did, how access was limited and what evidence was required before deployment.
+
+It is a reusable internal reference, not a product sales page or complete technical manual.
+
+## How it was built
 
 1. **People set the brief.** HGM approved the users, required features, data, limits and success measures before AI changed anything.
 2. **AI planned the build.** The approved brief became a technical plan covering access, data, testing and clear stop points.
 3. **AI built in staging.** Work stayed on a feature branch and one test backend. Supabase MCP provided narrow development access, not permission to release.
-4. **Evidence supported deployment.** Automated checks and a real browser proved the key journeys. Approved GitHub changes now deploy automatically through Netlify.
+4. **People reviewed the evidence.** Automated checks and a real browser proved the key journeys. Approved GitHub changes now deploy automatically through Netlify.
 
 AI accelerated the technical work. It did not decide the product or approve its own release.
-
-## YAGNI: build only what is needed now
-
-The first release included only features tied to an approved requirement:
-
-- a shared brand portfolio
-- manager and viewer access
-- daily public-source scans
-- sentiment evidence and trends
-
-Alerts, exports, competitor comparisons, social account connections and custom reporting stayed out because they were not needed for the first release.
-
-## KISS: choose the simplest secure design
-
-The build used:
-
-- one React web app
-- one Supabase backend
-- two clear staff roles
-- server-side AI calls and secrets
-- one GitHub-to-Netlify release path
-
-This reused HGM's standard tools and avoided custom infrastructure or unnecessary layers.
 
 ## Technology
 
