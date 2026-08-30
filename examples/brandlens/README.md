@@ -1,83 +1,61 @@
-# How Brandlens was built
+# Building Brandlens with AI
 
-Brandlens helps HGM staff understand how a brand is discussed online over time. Managers add the brand details; viewers can read the results and supporting evidence without changing the setup.
+Brandlens tracks how brands are discussed online. HGM used AI to plan, build and test the app while people controlled the scope, access and release decisions.
 
-This is a sanitised internal example. It explains which tools were used, how the test version was checked, and how the deployed website is kept up to date. It does not publish the raw chat, credentials, email addresses, private project details, source passages, private URLs, or raw AI responses.
+This sanitised case study excludes credentials, private project details, source passages, private URLs and raw AI responses.
 
-## What was agreed first
+## The AI development process
 
-- The product requirements and technical plan were approved before building started.
-- The work was limited to a separate feature branch and one named test environment.
-- The existing one-off scanning process had to keep working while the new daily-monitoring process was tested.
-- Managers could configure and run brands; viewers could only read results.
-- Halliday Wine Companion could be used as a public test brand.
-- Daily schedules and production side effects stayed off.
+1. **People set the brief.** HGM approved the users, required features, data, limits and success measures before AI changed anything.
+2. **AI planned the build.** The approved brief became a technical plan covering access, data, testing and clear stop points.
+3. **AI built in staging.** Work stayed on a feature branch and one test backend. Supabase MCP provided narrow development access, not permission to release.
+4. **Evidence supported deployment.** Automated checks and a real browser proved the key journeys. Approved GitHub changes now deploy automatically through Netlify.
 
-## What was used, and why
+AI accelerated the technical work. It did not decide the product or approve its own release.
 
-| Tool | Plain-language purpose |
+## YAGNI: build only what is needed now
+
+The first release included only features tied to an approved requirement:
+
+- a shared brand portfolio
+- manager and viewer access
+- daily public-source scans
+- sentiment evidence and trends
+
+Alerts, exports, competitor comparisons, social account connections and custom reporting stayed out because they were not needed for the first release.
+
+## KISS: choose the simplest secure design
+
+The build used:
+
+- one React web app
+- one Supabase backend
+- two clear staff roles
+- server-side AI calls and secrets
+- one GitHub-to-Netlify release path
+
+This reused HGM's standard tools and avoided custom infrastructure or unnecessary layers.
+
+## Technology
+
+| Purpose | Tool |
 | --- | --- |
-| React, TypeScript, Vite, TanStack Router, Tailwind and shadcn/ui | HGM's standard building blocks for the staff-facing website. |
-| Supabase | The controlled service for staff sign-in, brand settings, results and daily background work. |
-| OpenAI | Finds likely public sources and assesses the sentiment of relevant evidence. The result is an AI assessment, not an objective fact. |
-| Supabase MCP | A development-only connection that let the coding assistant inspect one named test environment and make only approved test changes. It is not part of the staff app. |
-| GitHub | Keeps each change on a separate branch for review and supplies approved changes to Netlify after merge. |
-| Netlify | Hosts the web interface. Its GitHub integration automatically builds and deploys approved changes from the deployment branch. |
+| Interface | React, TypeScript, Vite, Tailwind and shadcn/ui |
+| Data and access | Supabase |
+| AI discovery and assessment | OpenAI |
+| Controlled development access | Supabase MCP |
+| Source and deployment | GitHub and Netlify |
 
-## How the HGM skills guided the work
+Supabase MCP was development access and is not part of the finished app.
 
-HGM skills are reusable instructions for the coding assistant. They kept the build in a consistent order and prevented a successful test from being called a release.
+## Evidence
 
-1. `hgm-web-app` kept the work moving through planning, building, security checks, proof and human handoff.
-2. `build-hgm-web-app` kept implementation on a feature branch and connected the local app only to the approved test environment.
-3. `secure-hgm-supabase`, the official Supabase skill and Supabase Postgres guidance checked staff access, private credentials, data rules and background work.
-4. The Supabase MCP was read-only while the target was being checked. It could make changes only for the approved test work. The exact target remains in the non-public environment record.
-5. Browser acceptance tooling checked the real journey, mobile and desktop layout, keyboard use, page structure, links and browser errors.
-6. `review-hgm-web-app` defines the next independent review. The Netlify deployment is available for that review, but deployment alone is not an independent approval.
+The public Halliday Wine Companion test checked three sources, found 20 unique mentions, produced a 30-day sentiment score of `+40` and created no duplicate results when repeated.
 
-Detailed plain-language documentation is available for each skill:
+Sentiment remains an AI assessment, not an objective fact or exhaustive media-monitoring record.
 
-- [`hgm-web-app`: workflow coordinator](../../docs/skills/hgm-web-app.md)
-- [`scope-hgm-web-app`: technical planner](../../docs/skills/scope-hgm-web-app.md)
-- [`build-hgm-web-app`: non-production builder](../../docs/skills/build-hgm-web-app.md)
-- [`secure-hgm-supabase`: data and access specialist](../../docs/skills/secure-hgm-supabase.md)
-- [`review-hgm-web-app`: independent reviewer](../../docs/skills/review-hgm-web-app.md)
+## Current status
 
-## What happens during a scan
+The web interface is deployed on Netlify. Netlify's GitHub integration automatically builds and deploys approved changes from the deployment branch.
 
-1. Find likely public pages that mention the brand.
-2. Open permitted pages and keep only the relevant passage.
-3. Ask AI to classify the passage as positive, neutral or negative and explain why.
-4. Save the evidence and update the brand's daily summary.
-
-Social profile links help identify the correct brand. They are not connected accounts or guaranteed monitoring sources.
-
-## What the test proved
-
-Halliday Wine Companion was used as the approved public test brand.
-
-| Evidence | Result |
-| --- | ---: |
-| Public sources checked | 3 |
-| Unique mentions | 20 |
-| Positive | 8 |
-| Neutral | 12 |
-| Negative | 0 |
-| 30-day sentiment score | +40 |
-| Source failures | 0 |
-| Repeated test | No duplicate scans, sources, or mentions |
-
-All background work finished, the totals matched the 20 unique mentions, and no source failure was silently hidden. The +40 score is an AI assessment of this test evidence, not a promise that every online mention was found.
-
-Use [the staging canary report](../../templates/staging-canary-report.md) to record the detailed evidence and its owner.
-
-## Deployment and remaining controls
-
-The Brandlens web interface is deployed on Netlify. Netlify's GitHub integration means an approved change merged to the deployment branch triggers a new build and deployment automatically.
-
-Automatic deployment does not broaden access, change production data or turn on monitoring schedules. The remaining controlled steps are:
-
-- complete an independent review of the deployed version
-- obtain separate approval before activating the daily schedule
-
-See [the master skill](../../skills/hgm-web-app/SKILL.md) and its [staging-proof reference](../../skills/hgm-web-app/references/staging-proof.md) for the detailed controls used behind this plain-language example.
+Independent review and approval of the daily monitoring schedule remain separate human controls.
