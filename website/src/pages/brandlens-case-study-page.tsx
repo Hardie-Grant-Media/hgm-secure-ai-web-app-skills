@@ -2,7 +2,6 @@ import { Link } from "@tanstack/react-router"
 import {
   ArrowLeft,
   Bot,
-  CheckCircle2,
   CirclePause,
   Code2,
   Database,
@@ -51,33 +50,11 @@ const developmentSteps = [
   },
   {
     number: "04",
-    title: "Evidence supported deployment",
+    title: "People reviewed the evidence",
     description:
       "Automated checks and a real browser proved the key journeys. Approved GitHub changes now deploy automatically through Netlify.",
     icon: SearchCheck,
   },
-] as const
-
-const includedFeatures = [
-  "A shared brand portfolio",
-  "Manager and viewer access",
-  "Daily public-source scans",
-  "Sentiment evidence and trends",
-] as const
-
-const excludedFeatures = [
-  "Alerts and exports",
-  "Competitor comparisons",
-  "Social account connections",
-  "Custom reporting tools",
-] as const
-
-const simpleChoices = [
-  "One React web app",
-  "One Supabase backend",
-  "Two clear staff roles",
-  "Server-side AI and secrets",
-  "One GitHub-to-Netlify release path",
 ] as const
 
 const technology = [
@@ -149,9 +126,9 @@ export function BrandlensCaseStudyPage() {
               Building Brandlens with AI
             </h1>
             <p className="mt-5 max-w-3xl text-lg leading-8 text-muted-foreground">
-              Brandlens tracks how brands are discussed online. HGM used AI to
-              plan, build and test the app while people controlled the scope,
-              access and release decisions.
+              Brandlens tracks how brands are discussed online. This case study
+              shows HGM teams how an approved idea became a working app with AI
+              while people retained control of scope, access and release.
             </p>
             <div
               className="mt-6 flex flex-wrap gap-2"
@@ -165,10 +142,30 @@ export function BrandlensCaseStudyPage() {
         </section>
 
         <section className="border-y bg-card/70 py-12 sm:py-16">
-          <div className="section-shell flex flex-col gap-8">
+          <div className="section-shell grid gap-6 lg:grid-cols-[0.7fr_1.3fr]">
+            <h2 className="text-3xl font-semibold tracking-tight">
+              Why this case study exists
+            </h2>
+            <div className="flex flex-col gap-4 text-muted-foreground">
+              <p>
+                It gives staff and executives a concrete example of AI-assisted
+                development: where people made decisions, what AI did and how
+                access was limited.
+              </p>
+              <p>
+                It also records the evidence required before deployment so the
+                same safe workflow can be understood and reused. It is not a
+                sales page or a complete technical manual.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section className="section-shell py-12 sm:py-16">
+          <div className="flex flex-col gap-8">
             <div>
               <h2 className="text-3xl font-semibold tracking-tight">
-                The AI development process
+                How it was built
               </h2>
               <p className="mt-2 max-w-3xl text-muted-foreground">
                 AI accelerated the technical work. It did not decide the product
@@ -177,7 +174,7 @@ export function BrandlensCaseStudyPage() {
             </div>
             <ol
               className="grid gap-4 md:grid-cols-2 lg:grid-cols-4"
-              aria-label="AI development process"
+              aria-label="How Brandlens was built"
             >
               {developmentSteps.map((step) => {
                 const Icon = step.icon
@@ -204,79 +201,6 @@ export function BrandlensCaseStudyPage() {
                 )
               })}
             </ol>
-          </div>
-        </section>
-
-        <section className="section-shell py-12 sm:py-16">
-          <div className="flex flex-col gap-8">
-            <div>
-              <h2 className="text-3xl font-semibold tracking-tight">
-                YAGNI and KISS in practice
-              </h2>
-              <p className="mt-2 max-w-3xl text-muted-foreground">
-                The app contains only what the approved first release needs,
-                using the simplest secure design that meets those needs.
-              </p>
-            </div>
-            <div className="grid gap-4 lg:grid-cols-2">
-              <Card>
-                <CardHeader>
-                  <CheckCircle2
-                    className="size-6 text-primary"
-                    aria-hidden="true"
-                  />
-                  <CardTitle>YAGNI: build only what is needed now</CardTitle>
-                  <CardDescription>
-                    Every included feature supports a current requirement.
-                    Useful ideas without an immediate need stayed out.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="grid gap-6 sm:grid-cols-2">
-                  <div>
-                    <h3 className="font-semibold">Included</h3>
-                    <ul className="mt-3 flex flex-col gap-2 text-sm text-muted-foreground">
-                      {includedFeatures.map((feature) => (
-                        <li key={feature}>{feature}</li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold">Left out</h3>
-                    <ul className="mt-3 flex flex-col gap-2 text-sm text-muted-foreground">
-                      {excludedFeatures.map((feature) => (
-                        <li key={feature}>{feature}</li>
-                      ))}
-                    </ul>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardHeader>
-                  <ShieldCheck
-                    className="size-6 text-primary"
-                    aria-hidden="true"
-                  />
-                  <CardTitle>KISS: choose the simplest secure design</CardTitle>
-                  <CardDescription>
-                    The build reused HGM's standard tools and avoided custom
-                    infrastructure or unnecessary layers.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <ul className="grid gap-3 sm:grid-cols-2">
-                    {simpleChoices.map((choice) => (
-                      <li
-                        key={choice}
-                        className="rounded-lg bg-muted p-3 text-sm"
-                      >
-                        {choice}
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
-            </div>
           </div>
         </section>
 
