@@ -44,7 +44,7 @@ A required Netlify preview or independent evidence cannot be missing from a Gree
 
 ## Brandlens example
 
-The Brandlens worked example stops before this skill runs. Local and staging evidence exist, but the required Netlify preview and independent review are still pending. The correct status is therefore not Green and not “production-ready.”
+The Brandlens website is deployed through Netlify and local and staging evidence exist, but this independent review has not yet run. A deployment is evidence to inspect, not a Green recommendation by itself.
 
 ## Stop point
 

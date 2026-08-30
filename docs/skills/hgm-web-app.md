@@ -44,7 +44,7 @@ If product requirements are missing or unresolved, the skill stops rather than d
 
 ## Brandlens example
 
-For Brandlens, the master skill recognised that the requirements and technical brief were already approved. It routed the work into Build, required the staging-proof loop because the app used sign-in, database changes, queues, schedules and external AI, and stopped before Netlify, independent review and release.
+For Brandlens, the master skill recognised that the requirements and technical brief were already approved. It routed the work into Build, required the staging-proof loop because the app used sign-in, database changes, queues, schedules and external AI, and kept independent review and schedule activation as separate decisions after the Git-connected Netlify deployment.
 
 ## Handoff
 
