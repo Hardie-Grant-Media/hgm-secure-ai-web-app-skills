@@ -31,45 +31,110 @@ const developmentSteps = [
     number: "01",
     title: "People set the brief",
     description:
-      "HGM approved the users, required features, data, limits and success measures before AI changed anything.",
+      "HGM approved the audience, essential features, data boundaries and success measures before any build work began.",
     icon: ShieldCheck,
   },
   {
     number: "02",
     title: "AI planned the build",
     description:
-      "The approved brief became a technical plan covering access, data, testing and clear stop points.",
+      "The HGM web-app skills helped AI turn the brief into a practical plan for access, data, testing and approval points.",
     icon: Bot,
   },
   {
     number: "03",
     title: "AI built in staging",
     description:
-      "Work stayed on a feature branch and one test backend. Supabase MCP provided narrow development access, not permission to release.",
+      "AI wrote and tested the app on a feature branch against one named test environment, with secrets kept out of the browser and source code.",
     icon: Code2,
   },
   {
     number: "04",
     title: "People reviewed the evidence",
     description:
-      "Automated checks and a real browser proved the key journeys. Approved GitHub changes now deploy automatically through Netlify.",
+      "Automated checks, database readback and a real browser proved the important journeys before approved changes deployed through Netlify.",
     icon: SearchCheck,
   },
 ] as const
 
+const productCapabilities = [
+  {
+    title: "A shared brand portfolio",
+    description:
+      "Staff can add each brand's official identity, aliases, market, language and social profiles in one place.",
+    icon: Database,
+  },
+  {
+    title: "Daily public-web discovery",
+    description:
+      "The app looks for relevant public sources, keeps the cited passage and records gaps when a page cannot be checked.",
+    icon: SearchCheck,
+  },
+  {
+    title: "Evidence behind the trend",
+    description:
+      "Each mention includes an AI sentiment assessment and reason, while the dashboard shows volume, score and scan health over time.",
+    icon: Bot,
+  },
+] as const
+
+const deliveryControls = [
+  {
+    title: "HGM web-app skills",
+    description:
+      "Reusable instructions kept the work inside the approved brief and required evidence before each major handoff.",
+    icon: ShieldCheck,
+  },
+  {
+    title: "Supabase MCP",
+    description:
+      "A controlled development connection let AI inspect and change the named test backend. It was not part of the app or permission to release it.",
+    icon: LockKeyhole,
+  },
+  {
+    title: "Human decisions",
+    description:
+      "People approved the product, access model, deployment and whether automated daily monitoring could be activated.",
+    icon: CirclePause,
+  },
+] as const
+
 const technology = [
-  ["Interface", "React, TypeScript, Vite, Tailwind and shadcn/ui", Code2],
-  ["Data and access", "Supabase", Database],
-  ["AI discovery and assessment", "OpenAI", Bot],
-  ["Controlled development access", "Supabase MCP", LockKeyhole],
-  ["Source and deployment", "GitHub and Netlify", GitBranch],
+  [
+    "Staff interface",
+    "React, TypeScript, Vite, Tailwind and shadcn/ui",
+    "A clear, accessible web interface for the portfolio, evidence and scan history.",
+    Code2,
+  ],
+  [
+    "Data and access",
+    "Supabase",
+    "Sign-in, roles, brand records, evidence, daily summaries and background work.",
+    Database,
+  ],
+  [
+    "Discovery and assessment",
+    "OpenAI",
+    "Public-web discovery with citations, followed by an evidence-based sentiment assessment.",
+    Bot,
+  ],
+  [
+    "Source and deployment",
+    "GitHub and Netlify",
+    "Reviewed source changes automatically build and deploy from the approved branch.",
+    GitBranch,
+  ],
 ] as const
 
 const evidence = [
   ["Public sources", "3"],
   ["Unique mentions", "20"],
+  ["Positive", "8"],
+  ["Neutral", "12"],
+  ["Negative", "0"],
   ["30-day score", "+40"],
   ["Duplicate results", "0"],
+  ["Coverage failures", "0"],
 ] as const
 
 export function BrandlensCaseStudyPage() {
@@ -163,44 +228,111 @@ export function BrandlensCaseStudyPage() {
 
         <section className="section-shell py-12 sm:py-16">
           <div className="flex flex-col gap-8">
-            <div>
+            <div className="max-w-3xl">
               <h2 className="text-3xl font-semibold tracking-tight">
-                How it was built
+                What Brandlens was built to do
               </h2>
-              <p className="mt-2 max-w-3xl text-muted-foreground">
-                AI accelerated the technical work. It did not decide the product
-                or approve its own release.
+              <p className="mt-2 text-muted-foreground">
+                Brandlens gives HGM a daily, reviewable view of how selected
+                brands appear across the public web. Social-profile links help
+                identify a brand; they are not connected social integrations.
               </p>
             </div>
-            <ol
-              className="grid gap-4 md:grid-cols-2 lg:grid-cols-4"
-              aria-label="How Brandlens was built"
-            >
-              {developmentSteps.map((step) => {
-                const Icon = step.icon
+            <div className="grid gap-4 md:grid-cols-3">
+              {productCapabilities.map((capability) => {
+                const Icon = capability.icon
                 return (
-                  <li key={step.number}>
-                    <Card className="h-full" size="sm">
-                      <CardHeader>
-                        <div className="flex items-center justify-between gap-4">
-                          <Icon
-                            className="size-6 text-primary"
-                            aria-hidden="true"
-                          />
-                          <span className="font-mono text-xs text-muted-foreground">
-                            {step.number}
-                          </span>
-                        </div>
-                        <CardTitle>{step.title}</CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <CardDescription>{step.description}</CardDescription>
-                      </CardContent>
-                    </Card>
-                  </li>
+                  <Card key={capability.title} className="h-full">
+                    <CardHeader>
+                      <Icon
+                        className="size-6 text-primary"
+                        aria-hidden="true"
+                      />
+                      <CardTitle>{capability.title}</CardTitle>
+                      <CardDescription>
+                        {capability.description}
+                      </CardDescription>
+                    </CardHeader>
+                  </Card>
                 )
               })}
-            </ol>
+            </div>
+          </div>
+        </section>
+
+        <section className="border-y bg-card/70 py-12 sm:py-16">
+          <div className="section-shell">
+            <div className="flex flex-col gap-8">
+              <div>
+                <h2 className="text-3xl font-semibold tracking-tight">
+                  How it was built
+                </h2>
+                <p className="mt-2 max-w-3xl text-muted-foreground">
+                  AI accelerated the technical work. It did not decide the
+                  product or approve its own release.
+                </p>
+              </div>
+              <ol
+                className="grid gap-4 md:grid-cols-2 lg:grid-cols-4"
+                aria-label="How Brandlens was built"
+              >
+                {developmentSteps.map((step) => {
+                  const Icon = step.icon
+                  return (
+                    <li key={step.number}>
+                      <Card className="h-full" size="sm">
+                        <CardHeader>
+                          <div className="flex items-center justify-between gap-4">
+                            <Icon
+                              className="size-6 text-primary"
+                              aria-hidden="true"
+                            />
+                            <span className="font-mono text-xs text-muted-foreground">
+                              {step.number}
+                            </span>
+                          </div>
+                          <CardTitle>{step.title}</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <CardDescription>{step.description}</CardDescription>
+                        </CardContent>
+                      </Card>
+                    </li>
+                  )
+                })}
+              </ol>
+            </div>
+          </div>
+        </section>
+
+        <section className="section-shell py-12 sm:py-16">
+          <div className="flex flex-col gap-8">
+            <div className="max-w-3xl">
+              <h2 className="text-3xl font-semibold tracking-tight">
+                How guidance and access worked
+              </h2>
+              <p className="mt-2 text-muted-foreground">
+                The guidance, development connection and approval decisions had
+                separate jobs. None of them replaced the others.
+              </p>
+            </div>
+            <div className="grid gap-4 md:grid-cols-3">
+              {deliveryControls.map((control) => {
+                const Icon = control.icon
+                return (
+                  <Card key={control.title} className="h-full">
+                    <CardHeader>
+                      <Icon
+                        className="size-6 text-primary"
+                        aria-hidden="true"
+                      />
+                      <CardTitle>{control.title}</CardTitle>
+                      <CardDescription>{control.description}</CardDescription>
+                    </CardHeader>
+                  </Card>
+                )
+              })}
+            </div>
           </div>
         </section>
 
@@ -208,24 +340,27 @@ export function BrandlensCaseStudyPage() {
           <div className="section-shell grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
             <div>
               <h2 className="text-3xl font-semibold tracking-tight">
-                A small, standard stack
+                The technology and its purpose
               </h2>
               <p className="mt-2 text-muted-foreground">
-                Each tool has one clear role. Supabase MCP was controlled
-                development access and is not part of the finished app.
+                The app uses a small set of standard services, each with one
+                clear responsibility.
               </p>
             </div>
             <dl className="grid gap-3">
-              {technology.map(([purpose, tools, Icon]) => (
+              {technology.map(([purpose, tools, description, Icon]) => (
                 <div
                   key={purpose}
-                  className="grid gap-2 rounded-xl border bg-card p-4 sm:grid-cols-[1fr_1.35fr] sm:items-center"
+                  className="grid gap-2 rounded-xl border bg-card p-4 sm:grid-cols-[0.85fr_1.4fr] sm:items-start"
                 >
                   <dt className="flex items-center gap-2 font-semibold">
                     <Icon className="size-5" aria-hidden="true" />
                     {purpose}
                   </dt>
-                  <dd className="text-sm text-muted-foreground">{tools}</dd>
+                  <dd className="text-sm text-muted-foreground">
+                    <span className="font-medium text-foreground">{tools}</span>
+                    <span className="mt-1 block">{description}</span>
+                  </dd>
                 </div>
               ))}
             </dl>
@@ -264,14 +399,17 @@ export function BrandlensCaseStudyPage() {
                 />
                 <CardTitle>Human controls remain</CardTitle>
                 <CardDescription>
-                  Automatic deployment does not broaden access or activate
-                  monitoring.
+                  Netlify can publish approved code automatically, but it does
+                  not broaden access or activate the daily schedule.
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <ul className="flex flex-col gap-3 text-sm">
                   <li>Complete an independent review.</li>
                   <li>Approve the daily schedule before activation.</li>
+                  <li>
+                    Keep the public-web and AI-assessment limitations visible.
+                  </li>
                 </ul>
               </CardContent>
             </Card>
