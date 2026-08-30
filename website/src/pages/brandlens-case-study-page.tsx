@@ -2,7 +2,6 @@ import { Link } from "@tanstack/react-router"
 import {
   ArrowLeft,
   Bot,
-  BookOpenCheck,
   CheckCircle2,
   CirclePause,
   Code2,
@@ -10,8 +9,7 @@ import {
   ExternalLink,
   GitBranch,
   LockKeyhole,
-  RefreshCcw,
-  Search,
+  SearchCheck,
   ShieldCheck,
 } from "lucide-react"
 
@@ -29,156 +27,77 @@ const repositoryUrl =
   import.meta.env.VITE_REPOSITORY_URL ||
   "https://github.com/Hardie-Grant-Media/hgm-secure-ai-web-app-skills"
 
+const developmentSteps = [
+  {
+    number: "01",
+    title: "People set the brief",
+    description:
+      "HGM approved the users, required features, data, limits and success measures before AI changed anything.",
+    icon: ShieldCheck,
+  },
+  {
+    number: "02",
+    title: "AI planned the build",
+    description:
+      "The approved brief became a technical plan covering access, data, testing and clear stop points.",
+    icon: Bot,
+  },
+  {
+    number: "03",
+    title: "AI built in staging",
+    description:
+      "Work stayed on a feature branch and one test backend. Supabase MCP provided narrow development access, not permission to release.",
+    icon: Code2,
+  },
+  {
+    number: "04",
+    title: "Evidence supported deployment",
+    description:
+      "Automated checks and a real browser proved the key journeys. Approved GitHub changes now deploy automatically through Netlify.",
+    icon: SearchCheck,
+  },
+] as const
+
+const includedFeatures = [
+  "A shared brand portfolio",
+  "Manager and viewer access",
+  "Daily public-source scans",
+  "Sentiment evidence and trends",
+] as const
+
+const excludedFeatures = [
+  "Alerts and exports",
+  "Competitor comparisons",
+  "Social account connections",
+  "Custom reporting tools",
+] as const
+
+const simpleChoices = [
+  "One React web app",
+  "One Supabase backend",
+  "Two clear staff roles",
+  "Server-side AI and secrets",
+  "One GitHub-to-Netlify release path",
+] as const
+
 const technology = [
-  [
-    "The staff website",
-    "React, TypeScript, Vite, TanStack Router, Tailwind and shadcn/ui",
-    "These are HGM's standard building blocks for a clear, consistent and maintainable web app.",
-    Code2,
-  ],
-  [
-    "Sign-in, data and daily work",
-    "Supabase",
-    "One controlled service holds staff access, brand settings, scan results and the background work needed for daily monitoring.",
-    Database,
-  ],
-  [
-    "Finding and assessing mentions",
-    "OpenAI",
-    "AI searches for public sources and assesses the sentiment of relevant passages. Results remain an assessment, not an objective fact.",
-    Bot,
-  ],
-  [
-    "Safe development access",
-    "Supabase MCP",
-    "A development-only connection let the coding assistant inspect one named test environment and make only the changes that had been approved. It is not part of the staff app.",
-    LockKeyhole,
-  ],
-  [
-    "Source control and deployment",
-    "GitHub",
-    "Every change sits on a separate feature branch for review. Approved changes merged to the deployment branch are passed to Netlify automatically.",
-    GitBranch,
-  ],
-  [
-    "Web hosting",
-    "Netlify",
-    "Netlify hosts the web interface. Its GitHub integration automatically builds and deploys approved changes from the deployment branch.",
-    ExternalLink,
-  ],
-] as const
-
-const skillGuides = [
-  {
-    name: "hgm-web-app",
-    title: "Keeps the whole workflow in the right order",
-    stage: "All stages",
-    summary:
-      "The master skill is the single starting point. It identifies whether the app needs planning, building, security work, review or a human release decision.",
-    startsWith:
-      "Approved requirements, named owners, safety boundaries and authority for the current stage.",
-    delivers:
-      "The correct next step, the evidence needed and a clear handoff to the person who must decide next.",
-    brandlens:
-      "It routed Brandlens into Build, required extra staging proof for sign-in, queues and AI, and kept review and schedule activation as separate decisions.",
-    boundary:
-      "It does not invent the app, approve requirements or turn one approval into permission for later stages.",
-    document: "hgm-web-app",
-  },
-  {
-    name: "scope-hgm-web-app",
-    title: "Turns an approved idea into a build-ready plan",
-    stage: "Technical planning",
-    summary:
-      "Scope converts the approved product requirements into an HGM Technical Brief without changing code, accounts or systems.",
-    startsWith:
-      "The approved users, workflows, data, acceptance criteria, non-goals and AI safety boundaries.",
-    delivers:
-      "A plan covering access, environments, data, integrations, tests, risks, operations and required approvals.",
-    brandlens:
-      "It defined manager and viewer roles, the 30-day baseline, daily monitoring, visible failures, cost limits and disabled schedules.",
-    boundary:
-      "It does not choose features or start building. Missing product decisions go back to the product owner.",
-    document: "scope-hgm-web-app",
-  },
-  {
-    name: "build-hgm-web-app",
-    title: "Builds and proves the test version",
-    stage: "Non-production build",
-    summary:
-      "Build implements only the approved brief on a feature branch and an isolated test environment.",
-    startsWith:
-      "An approved Technical Brief, explicit build authority, exact test targets and prepared test data.",
-    delivers:
-      "A working test version with automated checks, browser evidence, denied cases and a record of unresolved risks.",
-    brandlens:
-      "It created the portfolio, brand views and monitoring workflow while preserving the earlier one-off scanner.",
-    boundary:
-      "It does not use production data, activate live schedules, merge its own work or call a passing build complete evidence.",
-    document: "build-hgm-web-app",
-  },
-  {
-    name: "secure-hgm-supabase",
-    title: "Protects staff access, data and background work",
-    stage: "Supabase security",
-    summary:
-      "Secure puts the real permissions at the database and server boundaries so they cannot be bypassed in the browser.",
-    startsWith:
-      "The approved roles, the exact test project, official Supabase guidance and narrowly scoped MCP access.",
-    delivers:
-      "Enforced access rules, safe server functions, reliable queues, versioned changes and allowed and denied test results.",
-    brandlens:
-      "It limited reads to active staff, changes to managers, kept AI credentials server-side and prevented duplicate daily work.",
-    boundary:
-      "The MCP is development access, not permission. Production changes and schedule activation still need separate approval.",
-    document: "secure-hgm-supabase",
-  },
-  {
-    name: "review-hgm-web-app",
-    title: "Checks the evidence independently",
-    stage: "Read-only review",
-    summary:
-      "Review compares the exact change and preview with the approved plan, then gives Green, Amber or Red advice.",
-    startsWith:
-      "The approved brief, exact commit and preview, test backend, migration plan and evidence from named owners.",
-    delivers:
-      "A plain-language recommendation with blockers, required actions, owners and remaining human decisions.",
-    brandlens:
-      "It has not yet run. The Netlify deployment is available for review, but deployment alone is not an independent approval.",
-    boundary:
-      "It remains read-only and cannot fix, merge, deploy, change access or make the final release decision.",
-    document: "review-hgm-web-app",
-  },
-] as const
-
-const informationFlow = [
-  ["1", "Discover", "Find likely public pages that mention the brand."],
-  ["2", "Check", "Open permitted pages and keep only the relevant passage."],
-  [
-    "3",
-    "Assess",
-    "Classify the passage as positive, neutral or negative and explain why.",
-  ],
-  ["4", "Report", "Save the evidence and update the brand's daily summary."],
+  ["Interface", "React, TypeScript, Vite, Tailwind and shadcn/ui", Code2],
+  ["Data and access", "Supabase", Database],
+  ["AI discovery and assessment", "OpenAI", Bot],
+  ["Controlled development access", "Supabase MCP", LockKeyhole],
+  ["Source and deployment", "GitHub and Netlify", GitBranch],
 ] as const
 
 const evidence = [
-  ["Public sources checked", "3"],
+  ["Public sources", "3"],
   ["Unique mentions", "20"],
-  ["Positive", "8"],
-  ["Neutral", "12"],
-  ["Negative", "0"],
   ["30-day score", "+40"],
-] as const
-
-const remainingControls = [
-  "Complete an independent review",
-  "Obtain approval before turning on the daily schedule",
+  ["Duplicate results", "0"],
 ] as const
 
 export function BrandlensCaseStudyPage() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen overflow-x-hidden">
       <a
         href="#main-content"
         className="fixed top-3 left-3 z-50 -translate-y-20 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-transform focus:translate-y-0"
@@ -205,7 +124,12 @@ export function BrandlensCaseStudyPage() {
                 Workflow
               </Link>
             </Button>
-            <Button asChild size="sm" variant="ghost">
+            <Button
+              asChild
+              className="hidden sm:inline-flex"
+              size="sm"
+              variant="ghost"
+            >
               <a href={repositoryUrl} target="_blank" rel="noreferrer">
                 Repository
                 <ExternalLink data-icon="inline-end" />
@@ -219,22 +143,21 @@ export function BrandlensCaseStudyPage() {
         <section className="section-shell py-12 sm:py-16">
           <div className="max-w-4xl">
             <p className="text-sm font-semibold tracking-[0.12em] text-primary uppercase">
-              HGM worked example
+              HGM case study
             </p>
             <h1 className="mt-3 text-4xl font-semibold tracking-tight sm:text-5xl">
-              How Brandlens was built
+              Building Brandlens with AI
             </h1>
             <p className="mt-5 max-w-3xl text-lg leading-8 text-muted-foreground">
-              Brandlens helps HGM staff understand how a brand is discussed
-              online over time. This page explains, in plain language, which
-              tools were used, how the work was checked and how the deployed
-              website is kept up to date.
+              Brandlens tracks how brands are discussed online. HGM used AI to
+              plan, build and test the app while people controlled the scope,
+              access and release decisions.
             </p>
             <div
               className="mt-6 flex flex-wrap gap-2"
               aria-label="Current status"
             >
-              <Badge>Test version checked successfully</Badge>
+              <Badge>Built and tested</Badge>
               <Badge variant="outline">Deployed on Netlify</Badge>
               <Badge variant="outline">Auto-deploys from GitHub</Badge>
             </div>
@@ -242,254 +165,172 @@ export function BrandlensCaseStudyPage() {
         </section>
 
         <section className="border-y bg-card/70 py-12 sm:py-16">
-          <div className="section-shell grid gap-8 lg:grid-cols-[0.75fr_1.25fr]">
+          <div className="section-shell flex flex-col gap-8">
             <div>
               <h2 className="text-3xl font-semibold tracking-tight">
-                What Brandlens does
+                The AI development process
               </h2>
-              <p className="mt-3 text-muted-foreground">
-                Managers add a brand, its website, other names it uses and its
-                social profiles. Viewers can then read the results without
-                changing the setup.
+              <p className="mt-2 max-w-3xl text-muted-foreground">
+                AI accelerated the technical work. It did not decide the product
+                or approve its own release.
               </p>
             </div>
-            <div className="grid gap-4 sm:grid-cols-2">
+            <ol
+              className="grid gap-4 md:grid-cols-2 lg:grid-cols-4"
+              aria-label="AI development process"
+            >
+              {developmentSteps.map((step) => {
+                const Icon = step.icon
+                return (
+                  <li key={step.number}>
+                    <Card className="h-full" size="sm">
+                      <CardHeader>
+                        <div className="flex items-center justify-between gap-4">
+                          <Icon
+                            className="size-6 text-primary"
+                            aria-hidden="true"
+                          />
+                          <span className="font-mono text-xs text-muted-foreground">
+                            {step.number}
+                          </span>
+                        </div>
+                        <CardTitle>{step.title}</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <CardDescription>{step.description}</CardDescription>
+                      </CardContent>
+                    </Card>
+                  </li>
+                )
+              })}
+            </ol>
+          </div>
+        </section>
+
+        <section className="section-shell py-12 sm:py-16">
+          <div className="flex flex-col gap-8">
+            <div>
+              <h2 className="text-3xl font-semibold tracking-tight">
+                YAGNI and KISS in practice
+              </h2>
+              <p className="mt-2 max-w-3xl text-muted-foreground">
+                The app contains only what the approved first release needs,
+                using the simplest secure design that meets those needs.
+              </p>
+            </div>
+            <div className="grid gap-4 lg:grid-cols-2">
               <Card>
                 <CardHeader>
-                  <Search className="size-6 text-primary" aria-hidden="true" />
-                  <CardTitle>Daily public-source scan</CardTitle>
+                  <CheckCircle2
+                    className="size-6 text-primary"
+                    aria-hidden="true"
+                  />
+                  <CardTitle>YAGNI: build only what is needed now</CardTitle>
                   <CardDescription>
-                    Brandlens looks for recent public mentions, checks the
-                    accessible source and keeps the relevant evidence.
+                    Every included feature supports a current requirement.
+                    Useful ideas without an immediate need stayed out.
                   </CardDescription>
                 </CardHeader>
+                <CardContent className="grid gap-6 sm:grid-cols-2">
+                  <div>
+                    <h3 className="font-semibold">Included</h3>
+                    <ul className="mt-3 flex flex-col gap-2 text-sm text-muted-foreground">
+                      {includedFeatures.map((feature) => (
+                        <li key={feature}>{feature}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold">Left out</h3>
+                    <ul className="mt-3 flex flex-col gap-2 text-sm text-muted-foreground">
+                      {excludedFeatures.map((feature) => (
+                        <li key={feature}>{feature}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </CardContent>
               </Card>
+
               <Card>
                 <CardHeader>
                   <ShieldCheck
                     className="size-6 text-primary"
                     aria-hidden="true"
                   />
-                  <CardTitle>Evidence, not a verdict</CardTitle>
+                  <CardTitle>KISS: choose the simplest secure design</CardTitle>
                   <CardDescription>
-                    Staff see the source, the positive, neutral or negative
-                    assessment and a short reason so they can review it.
+                    The build reused HGM's standard tools and avoided custom
+                    infrastructure or unnecessary layers.
                   </CardDescription>
                 </CardHeader>
+                <CardContent>
+                  <ul className="grid gap-3 sm:grid-cols-2">
+                    {simpleChoices.map((choice) => (
+                      <li
+                        key={choice}
+                        className="rounded-lg bg-muted p-3 text-sm"
+                      >
+                        {choice}
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
               </Card>
             </div>
           </div>
         </section>
 
-        <section className="section-shell py-12 sm:py-16">
-          <div className="flex flex-col gap-8">
-            <div>
-              <h2 className="text-3xl font-semibold tracking-tight">
-                What was used, and why
-              </h2>
-              <p className="mt-2 max-w-3xl text-muted-foreground">
-                The tools below each had one clear job. This kept the build
-                simpler and reduced the number of services HGM needs to manage.
-              </p>
-            </div>
-            <div className="grid gap-4 md:grid-cols-2">
-              {technology.map(([title, name, description, Icon]) => (
-                <Card key={title} size="sm">
-                  <CardHeader>
-                    <Icon className="size-5 text-primary" aria-hidden="true" />
-                    <CardTitle>{title}</CardTitle>
-                    <Badge className="w-fit" variant="outline">
-                      {name}
-                    </Badge>
-                  </CardHeader>
-                  <CardContent>
-                    <CardDescription>{description}</CardDescription>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-
         <section className="border-y bg-card/70 py-12 sm:py-16">
-          <div className="section-shell flex flex-col gap-8">
+          <div className="section-shell grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
             <div>
               <h2 className="text-3xl font-semibold tracking-tight">
-                What each HGM skill does
+                A small, standard stack
               </h2>
-              <p className="mt-2 max-w-3xl text-muted-foreground">
-                HGM skills are reusable instructions for the coding assistant.
-                Each one has a specific job, required inputs, evidence and a
-                point where a person must decide what happens next.
+              <p className="mt-2 text-muted-foreground">
+                Each tool has one clear role. Supabase MCP was controlled
+                development access and is not part of the finished app.
               </p>
             </div>
-            <ol className="flex flex-col gap-5" aria-label="HGM web-app skills">
-              {skillGuides.map((skill, index) => (
-                <li key={skill.name} id={skill.name} className="scroll-mt-24">
-                  <Card>
-                    <CardHeader>
-                      <div className="flex flex-wrap items-center gap-2">
-                        <Badge>Skill {index + 1} of 5</Badge>
-                        <Badge variant="outline">{skill.stage}</Badge>
-                      </div>
-                      <CardTitle>{skill.title}</CardTitle>
-                      <CardDescription>
-                        <code>{skill.name}</code> · {skill.summary}
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent className="flex flex-col gap-6">
-                      <dl className="grid gap-5 md:grid-cols-2">
-                        <div>
-                          <dt className="font-semibold">What it starts with</dt>
-                          <dd className="mt-1 text-sm leading-6 text-muted-foreground">
-                            {skill.startsWith}
-                          </dd>
-                        </div>
-                        <div>
-                          <dt className="font-semibold">What it delivers</dt>
-                          <dd className="mt-1 text-sm leading-6 text-muted-foreground">
-                            {skill.delivers}
-                          </dd>
-                        </div>
-                        <div>
-                          <dt className="font-semibold">
-                            What it did for Brandlens
-                          </dt>
-                          <dd className="mt-1 text-sm leading-6 text-muted-foreground">
-                            {skill.brandlens}
-                          </dd>
-                        </div>
-                        <div>
-                          <dt className="font-semibold">Where it must stop</dt>
-                          <dd className="mt-1 text-sm leading-6 text-muted-foreground">
-                            {skill.boundary}
-                          </dd>
-                        </div>
-                      </dl>
-                      <Button asChild className="w-fit" variant="outline">
-                        <a
-                          href={`${repositoryUrl}/blob/main/docs/skills/${skill.document}.md`}
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          <BookOpenCheck data-icon="inline-start" />
-                          Read full skill documentation
-                        </a>
-                      </Button>
-                    </CardContent>
-                  </Card>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </section>
-
-        <section className="section-shell py-12 sm:py-16">
-          <div className="flex flex-col gap-8">
-            <div>
-              <h2 className="text-3xl font-semibold tracking-tight">
-                What happens during a scan
-              </h2>
-              <p className="mt-2 max-w-3xl text-muted-foreground">
-                Social profile links help identify the right brand; they are not
-                connected accounts or guaranteed monitoring sources.
-              </p>
-            </div>
-            <ol
-              className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4"
-              aria-label="Scan process"
-            >
-              {informationFlow.map(([number, title, text]) => (
-                <li key={number}>
-                  <Card className="h-full" size="sm">
-                    <CardHeader>
-                      <span className="font-mono text-xs text-muted-foreground">
-                        Step {number}
-                      </span>
-                      <CardTitle>{title}</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <CardDescription>{text}</CardDescription>
-                    </CardContent>
-                  </Card>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </section>
-
-        <section className="border-y bg-card/70 py-12 sm:py-16">
-          <div className="section-shell flex flex-col gap-8">
-            <div>
-              <h2 className="text-3xl font-semibold tracking-tight">
-                What the test proved
-              </h2>
-              <p className="mt-2 max-w-3xl text-muted-foreground">
-                Halliday Wine Companion was used as the approved public test
-                brand. No source passages, private links, account details or
-                credentials are included here.
-              </p>
-            </div>
-            <dl className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {evidence.map(([label, value]) => (
-                <div key={label} className="rounded-xl border bg-card p-5">
-                  <dt className="text-sm text-muted-foreground">{label}</dt>
-                  <dd className="mt-2 text-3xl font-semibold tracking-tight">
-                    {value}
-                  </dd>
+            <dl className="grid gap-3">
+              {technology.map(([purpose, tools, Icon]) => (
+                <div
+                  key={purpose}
+                  className="grid gap-2 rounded-xl border bg-card p-4 sm:grid-cols-[1fr_1.35fr] sm:items-center"
+                >
+                  <dt className="flex items-center gap-2 font-semibold">
+                    <Icon className="size-5" aria-hidden="true" />
+                    {purpose}
+                  </dt>
+                  <dd className="text-sm text-muted-foreground">{tools}</dd>
                 </div>
               ))}
             </dl>
-            <div className="grid gap-4 md:grid-cols-2">
-              <Card size="sm">
-                <CardHeader>
-                  <RefreshCcw
-                    className="size-5 text-primary"
-                    aria-hidden="true"
-                  />
-                  <CardTitle>
-                    Repeating the test did not duplicate results
-                  </CardTitle>
-                  <CardDescription>
-                    The second run did not create extra copies of the same scan,
-                    source or mention.
-                  </CardDescription>
-                </CardHeader>
-              </Card>
-              <Card size="sm">
-                <CardHeader>
-                  <CheckCircle2
-                    className="size-5 text-primary"
-                    aria-hidden="true"
-                  />
-                  <CardTitle>The totals matched the evidence</CardTitle>
-                  <CardDescription>
-                    All background work finished, 20 unique mentions were
-                    counted and no source failures remained hidden.
-                  </CardDescription>
-                </CardHeader>
-              </Card>
-            </div>
-            <p className="max-w-3xl text-sm leading-6 text-muted-foreground">
-              The +40 score is the AI's assessment of this test evidence. It is
-              not an objective fact or a promise that every online mention was
-              found.
-            </p>
           </div>
         </section>
 
         <section className="section-shell py-12 sm:py-16">
-          <div className="grid gap-8 lg:grid-cols-[0.75fr_1.25fr]">
-            <div>
-              <h2 className="text-3xl font-semibold tracking-tight">
-                What remains controlled
-              </h2>
-              <p className="mt-2 text-muted-foreground">
-                The web interface is deployed through Netlify. Its GitHub
-                integration deploys approved changes automatically. Independent
-                review and activation of daily monitoring remain separate
-                decisions.
-              </p>
+          <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
+            <div className="flex flex-col gap-6">
+              <div>
+                <h2 className="text-3xl font-semibold tracking-tight">
+                  What the test proved
+                </h2>
+                <p className="mt-2 max-w-3xl text-muted-foreground">
+                  A public Halliday Wine Companion test reached a complete,
+                  duplicate-free result. Sentiment remains an AI assessment, not
+                  an objective fact or exhaustive media-monitoring record.
+                </p>
+              </div>
+              <dl className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                {evidence.map(([label, value]) => (
+                  <div key={label} className="rounded-xl border bg-card p-4">
+                    <dt className="text-sm text-muted-foreground">{label}</dt>
+                    <dd className="mt-2 text-3xl font-semibold tracking-tight">
+                      {value}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
             </div>
             <Card>
               <CardHeader>
@@ -497,41 +338,18 @@ export function BrandlensCaseStudyPage() {
                   className="size-6 text-primary"
                   aria-hidden="true"
                 />
-                <CardTitle>Separate approvals still required</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ul className="grid gap-3 sm:grid-cols-2">
-                  {remainingControls.map((item) => (
-                    <li key={item} className="flex items-start gap-2 text-sm">
-                      <CirclePause
-                        className="mt-0.5 size-4 shrink-0"
-                        aria-hidden="true"
-                      />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
-          </div>
-        </section>
-
-        <section className="border-t bg-card/70 py-10">
-          <div className="section-shell">
-            <Card size="sm">
-              <CardHeader>
-                <LockKeyhole
-                  className="size-5 text-primary"
-                  aria-hidden="true"
-                />
-                <CardTitle>What this example leaves out</CardTitle>
+                <CardTitle>Human controls remain</CardTitle>
                 <CardDescription>
-                  The raw chat, credentials, email addresses, private project
-                  details, source passages and private URLs are not published.
-                  Only the reusable workflow and sanitised test totals are
-                  shown.
+                  Automatic deployment does not broaden access or activate
+                  monitoring.
                 </CardDescription>
               </CardHeader>
+              <CardContent>
+                <ul className="flex flex-col gap-3 text-sm">
+                  <li>Complete an independent review.</li>
+                  <li>Approve the daily schedule before activation.</li>
+                </ul>
+              </CardContent>
             </Card>
           </div>
         </section>
@@ -539,7 +357,7 @@ export function BrandlensCaseStudyPage() {
 
       <footer className="border-t bg-card/80">
         <div className="section-shell py-7 text-sm text-muted-foreground">
-          <p>HGM internal guidance · Brandlens worked example</p>
+          <p>HGM internal guidance · Brandlens case study</p>
         </div>
       </footer>
     </div>
