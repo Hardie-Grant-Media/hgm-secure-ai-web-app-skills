@@ -49,7 +49,7 @@ The specialist skills remain available for a specific stage:
 5. Use [`review-hgm-web-app`](skills/review-hgm-web-app/SKILL.md) for an independent, read-only recommendation.
 6. A named human release authority decides whether to merge and release.
 
-See [the Brandlens worked example](examples/brandlens/README.md) for a sanitised golden path that reaches local and staging acceptance, then stops before Netlify, independent review, production, merge, or schedule activation.
+See [the Brandlens worked example](examples/brandlens/README.md) for a sanitised golden path covering local and staging acceptance plus Git-connected Netlify deployment. Independent review and schedule activation remain separate controlled steps.
 
 The skills do not approve production releases. They stop before production migrations, access changes, merges, and releases.
 

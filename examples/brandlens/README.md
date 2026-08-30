@@ -2,7 +2,7 @@
 
 Brandlens helps HGM staff understand how a brand is discussed online over time. Managers add the brand details; viewers can read the results and supporting evidence without changing the setup.
 
-This is a sanitised internal example. It explains which tools were used, how the test version was checked, and why the work stopped before release. It does not publish the raw chat, credentials, email addresses, private project details, source passages, private URLs, or raw AI responses.
+This is a sanitised internal example. It explains which tools were used, how the test version was checked, and how the deployed website is kept up to date. It does not publish the raw chat, credentials, email addresses, private project details, source passages, private URLs, or raw AI responses.
 
 ## What was agreed first
 
@@ -21,8 +21,8 @@ This is a sanitised internal example. It explains which tools were used, how the
 | Supabase | The controlled service for staff sign-in, brand settings, results and daily background work. |
 | OpenAI | Finds likely public sources and assesses the sentiment of relevant evidence. The result is an AI assessment, not an objective fact. |
 | Supabase MCP | A development-only connection that let the coding assistant inspect one named test environment and make only approved test changes. It is not part of the staff app. |
-| GitHub | Keeps each change on a separate branch so people can review it before merge. |
-| Netlify | The approved host for the website. Its preview and release steps remain pending. |
+| GitHub | Keeps each change on a separate branch for review and supplies approved changes to Netlify after merge. |
+| Netlify | Hosts the web interface. Its GitHub integration automatically builds and deploys approved changes from the deployment branch. |
 
 ## How the HGM skills guided the work
 
@@ -33,7 +33,7 @@ HGM skills are reusable instructions for the coding assistant. They kept the bui
 3. `secure-hgm-supabase`, the official Supabase skill and Supabase Postgres guidance checked staff access, private credentials, data rules and background work.
 4. The Supabase MCP was read-only while the target was being checked. It could make changes only for the approved test work. The exact target remains in the non-public environment record.
 5. Browser acceptance tooling checked the real journey, mobile and desktop layout, keyboard use, page structure, links and browser errors.
-6. `review-hgm-web-app` defines the next independent review. It has not been run, so this example does not claim Brandlens is ready for production.
+6. `review-hgm-web-app` defines the next independent review. The Netlify deployment is available for that review, but deployment alone is not an independent approval.
 
 Detailed plain-language documentation is available for each skill:
 
@@ -71,16 +71,13 @@ All background work finished, the totals matched the 20 unique mentions, and no 
 
 Use [the staging canary report](../../templates/staging-canary-report.md) to record the detailed evidence and its owner.
 
-## What still needs to happen
+## Deployment and remaining controls
 
-This example stops after successful local and staging checks. It does not complete or imply:
+The Brandlens web interface is deployed on Netlify. Netlify's GitHub integration means an approved change merged to the deployment branch triggers a new build and deployment automatically.
 
-- a Netlify preview
-- an independent review
-- a named human release decision
-- a merge to the protected branch
-- production setup, credentials, data or access changes
-- activation of the daily schedule
-- publication of these documentation changes to GitHub Pages
+Automatic deployment does not broaden access, change production data or turn on monitoring schedules. The remaining controlled steps are:
+
+- complete an independent review of the deployed version
+- obtain separate approval before activating the daily schedule
 
 See [the master skill](../../skills/hgm-web-app/SKILL.md) and its [staging-proof reference](../../skills/hgm-web-app/references/staging-proof.md) for the detailed controls used behind this plain-language example.

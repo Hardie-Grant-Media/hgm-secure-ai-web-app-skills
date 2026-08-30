@@ -55,15 +55,15 @@ const technology = [
     LockKeyhole,
   ],
   [
-    "Source control and review",
+    "Source control and deployment",
     "GitHub",
-    "Every change sits on a separate feature branch so it can be checked before anyone decides whether to merge it.",
+    "Every change sits on a separate feature branch for review. Approved changes merged to the deployment branch are passed to Netlify automatically.",
     GitBranch,
   ],
   [
-    "Future web hosting",
+    "Web hosting",
     "Netlify",
-    "Netlify is the approved host for the web interface, but its preview and release steps have not happened in this example.",
+    "Netlify hosts the web interface. Its GitHub integration automatically builds and deploys approved changes from the deployment branch.",
     ExternalLink,
   ],
 ] as const
@@ -80,7 +80,7 @@ const skillGuides = [
     delivers:
       "The correct next step, the evidence needed and a clear handoff to the person who must decide next.",
     brandlens:
-      "It routed Brandlens into Build, required extra staging proof for sign-in, queues and AI, and stopped before release.",
+      "It routed Brandlens into Build, required extra staging proof for sign-in, queues and AI, and kept review and schedule activation as separate decisions.",
     boundary:
       "It does not invent the app, approve requirements or turn one approval into permission for later stages.",
     document: "hgm-web-app",
@@ -144,7 +144,7 @@ const skillGuides = [
     delivers:
       "A plain-language recommendation with blockers, required actions, owners and remaining human decisions.",
     brandlens:
-      "It has not yet run. Brandlens therefore remains a successful test version, not a production-ready app.",
+      "It has not yet run. The Netlify deployment is available for review, but deployment alone is not an independent approval.",
     boundary:
       "It remains read-only and cannot fix, merge, deploy, change access or make the final release decision.",
     document: "review-hgm-web-app",
@@ -171,13 +171,9 @@ const evidence = [
   ["30-day score", "+40"],
 ] as const
 
-const pendingWork = [
-  "Create and test the Netlify preview",
+const remainingControls = [
   "Complete an independent review",
-  "Obtain a named human release decision",
-  "Merge the feature branch",
-  "Prepare the production environment",
-  "Turn on the daily schedule",
+  "Obtain approval before turning on the daily schedule",
 ] as const
 
 export function BrandlensCaseStudyPage() {
@@ -231,16 +227,16 @@ export function BrandlensCaseStudyPage() {
             <p className="mt-5 max-w-3xl text-lg leading-8 text-muted-foreground">
               Brandlens helps HGM staff understand how a brand is discussed
               online over time. This page explains, in plain language, which
-              tools were used, how the work was checked and why it stopped
-              before release.
+              tools were used, how the work was checked and how the deployed
+              website is kept up to date.
             </p>
             <div
               className="mt-6 flex flex-wrap gap-2"
               aria-label="Current status"
             >
               <Badge>Test version checked successfully</Badge>
-              <Badge variant="outline">Independent review still required</Badge>
-              <Badge variant="outline">Not released</Badge>
+              <Badge variant="outline">Deployed on Netlify</Badge>
+              <Badge variant="outline">Auto-deploys from GitHub</Badge>
             </div>
           </div>
         </section>
@@ -486,11 +482,13 @@ export function BrandlensCaseStudyPage() {
           <div className="grid gap-8 lg:grid-cols-[0.75fr_1.25fr]">
             <div>
               <h2 className="text-3xl font-semibold tracking-tight">
-                What still needs to happen
+                What remains controlled
               </h2>
               <p className="mt-2 text-muted-foreground">
-                A successful test version is not the same as a released app.
-                These steps need named people to review and approve them.
+                The web interface is deployed through Netlify. Its GitHub
+                integration deploys approved changes automatically. Independent
+                review and activation of daily monitoring remain separate
+                decisions.
               </p>
             </div>
             <Card>
@@ -499,11 +497,11 @@ export function BrandlensCaseStudyPage() {
                   className="size-6 text-primary"
                   aria-hidden="true"
                 />
-                <CardTitle>Not completed in this example</CardTitle>
+                <CardTitle>Separate approvals still required</CardTitle>
               </CardHeader>
               <CardContent>
                 <ul className="grid gap-3 sm:grid-cols-2">
-                  {pendingWork.map((item) => (
+                  {remainingControls.map((item) => (
                     <li key={item} className="flex items-start gap-2 text-sm">
                       <CirclePause
                         className="mt-0.5 size-4 shrink-0"
