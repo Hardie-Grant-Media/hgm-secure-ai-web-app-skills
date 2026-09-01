@@ -28,9 +28,9 @@ If either required skill or the required MCP access is unavailable, database wor
 
 | Profile | Intended users | Identity baseline | Typical exposure |
 | --- | --- | --- | --- |
-| Internal | HGM employees | Microsoft Entra SSO through Supabase SAML SSO | Signed-in staff only |
-| Public | Anonymous visitors | No identity for public reads | Deliberately public information only |
-| Customer portal | Customers or partners | Approved Supabase Auth method | Each user or tenant sees only its own data |
+| Internal | HGM employees | Microsoft Entra SAML SSO only | Assigned staff with explicit app membership |
+| Public | Anonymous visitors | No identity for public reads | Approved public fields only; never customer data |
+| Customer portal | Customers or partners | Passwordless email; MFA for sensitive access | Each user or tenant sees only its own data |
 
 An application may combine profiles, but its technical brief must define separate routes, data, permissions, and tests for each profile.
 
@@ -117,6 +117,9 @@ Check these sources when implementing. Do not rely on package versions or copied
 - [shadcn/ui documentation](https://ui.shadcn.com/docs)
 - [Supabase documentation](https://supabase.com/docs)
 - [Supabase API security](https://supabase.com/docs/guides/api/securing-your-api)
+- [Supabase SAML SSO](https://supabase.com/docs/guides/auth/enterprise-sso/auth-sso-saml)
+- [Supabase passwordless email](https://supabase.com/docs/guides/auth/auth-email-passwordless)
+- [Supabase MFA](https://supabase.com/docs/guides/auth/auth-mfa)
 - [Supabase MCP setup and security](https://supabase.com/docs/guides/ai-tools/mcp)
 - [Supabase Row Level Security](https://supabase.com/docs/guides/database/postgres/row-level-security)
 - [Supabase changelog](https://supabase.com/changelog)

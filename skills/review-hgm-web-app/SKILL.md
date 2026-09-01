@@ -35,9 +35,11 @@ Confirm:
 
 - Verify React, TypeScript, TanStack Router, Tailwind, shadcn/ui, Supabase, and Netlify use follows the approved standard.
 - Treat route guards and hidden UI as user experience only; trace authorization to grants, RLS, Storage policies, or Edge Function checks.
-- Check internal Entra membership, public exposure, or customer ownership and tenancy according to the selected profile.
+- For internal routes, verify Entra SAML provider provenance and active app membership. Reject password, passwordless, social, shared-account, email-domain, unassigned, and removed-user access.
+- For public routes, verify the anonymous projection contains only approved public fields and that anonymous writes use protected Edge Functions.
+- For customer routes, verify the approved passwordless flow, signup and enrollment state, ownership or tenancy, account removal, and required MFA enforcement at RLS or Edge Function boundaries.
 - Verify Auth provider state separately from public signup, invitation or enrollment, application membership, recovery, SMTP, password policy, and account removal whenever those controls are required.
-- Verify every approved architecture or identity exception has an owner, rationale, compensating controls, approval evidence, and review date.
+- Verify every approved architecture exception has an owner, rationale, compensating controls, approval evidence, and review date. Do not accept an internal sign-in exception to Entra SAML.
 - Reject email-suffix or user-editable-metadata authorization and role-only `authenticated` policies.
 - Inspect exposed objects, grants, RLS, views, privileged functions, Storage, secrets, function validation, integrations, abuse controls, and logging.
 - Verify previews do not use production data, credentials, schedules, or external side effects.
@@ -47,7 +49,7 @@ Confirm:
 Assess current results for:
 
 - formatting, linting, types, unit and integration tests, and build
-- allowed, unauthenticated, unauthorized, removed-member, and cross-tenant cases
+- allowed, unauthenticated, unauthorized, wrong-provider, uninvited, removed-member, pre-MFA, verified-MFA, and cross-tenant cases
 - invalid input, dependency failure, and absence of prohibited behavior
 - browser journeys, responsive behavior, keyboard use, and accessibility
 - dependency, secret, and security scanning

@@ -28,6 +28,7 @@ If a missing decision would change the product, identity model, data use or risk
 
 - whether the app is internal, public, a customer portal or a defined combination
 - how users sign in and how application membership is granted or removed
+- whether Entra SAML is ready for internal users, and which customer data or actions require MFA
 - which roles can perform each action and where that permission is enforced
 - which information reaches the browser and which work stays server-side
 - which local, test, preview and production environments exist
@@ -51,7 +52,7 @@ The HGM Technical Brief records:
 
 ## Brandlens example
 
-For Brandlens, Scope translated the monitoring requirements into manager and viewer roles, daily and manual runs, a 30-day baseline, public-source discovery, evidence retention, visible failures, cost limits and a schedule that would remain disabled until separately approved. It also recorded the approved identity exception and its compensating controls.
+For Brandlens, Scope translated the monitoring requirements into manager and viewer roles, daily and manual runs, a 30-day baseline, public-source discovery, evidence retention, visible failures, cost limits and a schedule that would remain disabled until separately approved. Under the current standard, Entra SAML is required before an internal app can pass access review.
 
 ## Stop point
 

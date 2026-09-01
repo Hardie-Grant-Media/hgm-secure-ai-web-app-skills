@@ -27,7 +27,7 @@ Build turns an approved plan into the smallest complete test version. It is desi
 - inspects the existing project before adding routes, components or packages
 - builds only the approved workflows and states
 - keeps privileged work and third-party credentials on the server
-- adds permitted, unauthenticated, unauthorised and cross-user tests where relevant
+- adds permitted, unauthenticated, unauthorised, wrong-provider, MFA and cross-user tests where relevant
 - preserves existing interfaces and uses backward-compatible changes
 - records deviations and unresolved risks instead of hiding them
 

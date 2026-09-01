@@ -25,6 +25,7 @@ Hiding a button is not security. This skill puts the real rules at the database,
 ## What it controls
 
 - who may sign in and how account enrollment, recovery and removal work
+- how internal Entra SAML, customer passwordless login and required MFA are enforced
 - who may read, add, update or delete each type of information
 - which database objects the browser can reach
 - how private files are separated between users or organisations
@@ -39,7 +40,7 @@ The MCP is a development connection, not part of the finished app. It is scoped 
 
 ## What it proves
 
-- sign-in provider, public signup, invitation, membership, recovery and password controls are checked separately
+- sign-in provider and provenance, public signup, automatic account creation, invitation, membership, recovery and MFA are checked separately
 - allowed and denied database, file and function requests behave correctly
 - private credentials never reach the browser or public build
 - queued work uses checkpoints, bounded retries and visible final failures

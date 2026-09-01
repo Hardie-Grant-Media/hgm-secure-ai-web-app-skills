@@ -14,7 +14,9 @@ Use this checklist while scoping, building, and reviewing. It prompts decisions;
 
 - [ ] Authentication method is approved for the application profile.
 - [ ] Enrollment, verification, recovery, removal, and session revocation are defined.
-- [ ] Internal access confirms the Entra tenant and approved membership source.
+- [ ] Internal access confirms the Entra SAML provider, assigned user or group, and active app membership; no fallback staff login exists.
+- [ ] Customer access uses the approved passwordless method and automatic account creation is disabled unless approved.
+- [ ] Sensitive customer data and privileged actions require MFA at the RLS or Edge Function boundary.
 - [ ] Shared accounts and email-suffix authorization are prohibited.
 - [ ] User-editable metadata is not used for authorization.
 
@@ -40,6 +42,7 @@ For every protected resource, complete this table.
 - [ ] Every data set has a source, purpose, classification, owner, and retention decision.
 - [ ] Only required fields are collected and returned.
 - [ ] Public projections exclude private and operational fields.
+- [ ] Anonymous reads exclude all customer data.
 - [ ] Preview uses synthetic or approved non-production data.
 - [ ] Logs and errors exclude secrets and unnecessary personal data.
 - [ ] Export, correction, deletion, and retirement requirements are recorded.

@@ -4,6 +4,9 @@ These are minimum controls for AI-assisted HGM web applications. Apply them in a
 
 ## Identity and authorization
 
+- Internal routes require Microsoft Entra SAML SSO plus active application membership. Do not provide another staff sign-in path. If SAML plan eligibility, metadata, assignments, or test access are missing, stop with an IT or billing handoff.
+- Customer portals default to email magic links or one-time codes with automatic account creation disabled unless approved. A verified email is not customer-data authorization; ownership or tenant membership is still required.
+- Enforce MFA at restrictive RLS or Edge Function boundaries for sensitive customer data, exports, billing, administration, and other privileged actions.
 - Use the Supabase user ID as the stable identity in policies and application records.
 - Never authorize with email suffixes, shared accounts, client-provided role names, or `user_metadata` / `raw_user_meta_data`.
 - Protected `app_metadata` may carry authorization claims, but account for claim staleness. Prefer database membership checks when immediate changes are required.
@@ -11,7 +14,7 @@ These are minimum controls for AI-assisted HGM web applications. Apply them in a
 - Express permissions as specific actions and resources. Fail closed when membership, tenant, role, or configuration is missing.
 - Test authorization directly against the Data API, Storage, and Edge Function boundary.
 - Verify provider enablement, public signup, invitation or enrollment, application membership, recovery, SMTP, password policy, and removal as separate controls. Do not infer one from another.
-- Record any approved identity or architecture exception with an owner, rationale, compensating controls, approval evidence, and review date.
+- Record any approved architecture exception with an owner, rationale, compensating controls, approval evidence, and review date. Internal Entra SAML is not an exception point.
 
 ## Database and Data API
 
@@ -56,6 +59,7 @@ These are minimum controls for AI-assisted HGM web applications. Apply them in a
 
 ## Public abuse controls
 
+- Never expose customer, personal, confidential, unpublished, or operational data through anonymous reads.
 - Put anonymous writes behind an Edge Function.
 - Rate-limit by the most reliable available combination of identity, IP, device, or request key without treating any single value as trustworthy.
 - Bound request sizes, pagination, search complexity, file processing, external API cost, and generated output.

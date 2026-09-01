@@ -55,6 +55,10 @@ Summarize whether the current commit and preview satisfy the approved requiremen
 
 ## Identity and authorization review
 
+- Required provider and observed provider provenance:
+- Signup, automatic-account-creation, invitation, and removal state:
+- MFA boundary and pre-MFA denial evidence:
+
 | Boundary | Allowed case and result | Denied case and result | Evidence |
 | --- | --- | --- | --- |
 | Route experience |  |  |  |
@@ -63,7 +67,7 @@ Summarize whether the current commit and preview satisfy the approved requiremen
 | Edge Function |  |  |  |
 | Role or tenant change |  |  |  |
 
-Confirm that browser route guards are not the only enforcement and that no authorization depends on email suffixes or user-editable metadata.
+Confirm that browser route guards are not the only enforcement, internal routes accept only Entra SAML identities with active membership, and no authorization depends on email suffixes, verified email alone, or user-editable metadata.
 
 ## Data, secrets, and integrations
 

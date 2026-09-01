@@ -39,6 +39,7 @@ If they are unavailable, continue with the rules below. Do not require the user 
 - Keep local, preview, staging, and production data, credentials, schedules, and integrations separate.
 - Never expose secrets or service-role keys to React, logs, examples, or screenshots.
 - Never use email suffixes or user-editable metadata for authorization.
+- Treat authentication and application authorization as separate controls.
 
 ## Product discipline
 
@@ -49,9 +50,11 @@ If they are unavailable, continue with the rules below. Do not require the user 
 
 Classify the app as:
 
-- `Internal`: named staff through Microsoft Entra SSO and explicit application roles.
-- `Public`: only approved reads are public; writes and abuse-sensitive operations use validated, rate-limited Edge Functions.
-- `Customer portal`: ownership or tenant membership is enforced by RLS.
+- `Internal`: require Microsoft Entra SAML SSO and explicit application membership. Do not add password, passwordless, social, shared-account, or email-domain fallback access to internal routes. Confirm the SAML provider, assigned Entra user or group, Supabase user ID, and active app membership. In a combined app, a customer identity must never satisfy the internal boundary.
+- `Public`: expose only approved public fields. Customer, personal, confidential, unpublished, and operational data must not be anonymously readable. Send forms, uploads, integrations, and other anonymous writes through validated, rate-limited Edge Functions.
+- `Customer portal`: default to Supabase passwordless email magic links or one-time codes. Prevent automatic account creation unless self-registration is explicitly approved; a new account has no customer-data access until ownership or tenant membership is securely established. Require MFA at the RLS or Edge Function boundary for sensitive customer data, exports, billing, administration, and other privileged actions.
+
+For internal apps, verify that the Supabase project supports SAML before Build. If Entra metadata, the assigned pilot users or group, the required Supabase plan, or a non-production SAML test environment is unavailable, stop and provide a specific IT or billing handoff. The IT handoff must include the project Entity ID and ACS URL and request the Entra App Federation Metadata URL or XML, email NameID, and assigned test users or group. The billing handoff must state that Supabase SAML requires Pro or above. Do not request a client secret or substitute another sign-in method.
 
 ## Technical plan
 
@@ -73,7 +76,7 @@ When implementation includes Auth, Supabase mutations, Edge Functions, queues, s
 - Implement only the approved technical scope and safety boundaries.
 - Inspect the current project before adding routes, components, services, or packages.
 - Use synthetic data and non-production integrations.
-- Add allowed, unauthenticated, unauthorized, and cross-user or cross-tenant tests as relevant.
+- Add allowed, unauthenticated, unauthorized, removed-member, wrong-provider, MFA, and cross-user or cross-tenant tests as relevant.
 - Declare the repository, branch, environment, exact Supabase target, MCP mode, schedule state, and external side-effect state before mutating staging.
 - Read back the target and exercise observable application behavior. A dashboard visit, successful deployment command, or green-looking screen is not proof.
 - Record changed behavior, evidence ownership, preview details, checks, deviations, and unresolved risks.
@@ -87,7 +90,7 @@ For any Supabase work, apply the official `supabase` skill when available. For S
 - Scope Supabase MCP to the exact approved project and minimum feature groups.
 - Use read-only MCP for discovery. Enable mutation only for an explicitly approved non-production action.
 - Prefer a narrow exposed API schema, private implementation objects, explicit grants, and deny-by-default RLS.
-- Validate Auth, ownership, tenancy, Storage paths, function input, webhook signatures, quotas, and secret handling.
+- Validate the required Auth provider, signup state, enrollment, provider provenance, MFA level, ownership, tenancy, membership removal, Storage paths, function input, webhook signatures, quotas, and secret handling.
 - Version migrations, prefer backward-compatible changes, and record recovery or forward-fix steps.
 - Run allowed and denied tests plus relevant database and security advisors.
 

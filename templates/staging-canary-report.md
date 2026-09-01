@@ -14,6 +14,8 @@ Complete this report only for an approved non-production canary. Redact credenti
 - Supabase MCP mode and enabled features:
 - Auth provider state:
 - Public-signup state:
+- Automatic-account-creation state:
+- MFA state and protected boundary:
 - Schedule state:
 - External side effects and their state:
 - Evidence owner:
@@ -36,7 +38,7 @@ Complete this report only for an approved non-production canary. Redact credenti
 | Tables and constraints |  |  |  |
 | Grants and RLS policies |  |  |  |
 | Functions |  |  |  |
-| Auth provider and signup |  |  |  |
+| Auth provider, provenance, signup, and MFA |  |  |  |
 | Staff memberships and roles |  |  |  |
 | Queues and schedules |  |  |  |
 

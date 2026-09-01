@@ -22,16 +22,20 @@ Use this proof loop during the existing Build stage whenever implementation incl
 
 Treat these as separate controls and verify each one that the technical brief requires:
 
-- provider enablement
+- provider enablement and provider provenance
 - public-signup enablement or disablement
+- automatic-account-creation enablement or disablement
 - invitation and enrollment
 - application membership and role assignment
+- MFA enrollment, assurance level, and protected-boundary enforcement
 - password recovery
 - production SMTP readiness
 - password policy
 - removal or suspension behavior
 
 A valid identity-provider session does not prove application membership or authorization.
+
+For internal routes, prove that an assigned Entra SAML user with active membership succeeds while a non-SAML account, unassigned user, and removed member fail. For customer routes, prove that uninvited accounts and cross-customer access fail, and that protected data or actions reject pre-MFA sessions.
 
 ## Queue and scheduled-work proof
 

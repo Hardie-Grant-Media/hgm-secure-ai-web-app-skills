@@ -35,6 +35,9 @@ Before changing anything:
 - Use Supabase MCP `search_docs` for current documentation and project-scoped MCP tools for approved inspection or non-production work. Use read-only mode for discovery; an MCP connection does not authorize mutation.
 - Put secrets, third-party integrations, anonymous writes, webhooks, quotas, and privileged work in authorized Edge Functions.
 - Add the fewest dependencies necessary, pin direct versions, and commit the lockfile.
+- For internal routes, accept only the approved Entra SAML provider plus active app membership. If SAML setup or plan eligibility is missing, stop with an IT or billing handoff instead of adding another login method.
+- For customer portals, use the approved passwordless email flow, prevent unapproved automatic account creation, and enforce ownership or tenant membership for every customer record. Enforce required MFA at RLS or Edge Function boundaries.
+- For public routes, return only the approved public projection. Anonymous writes must not receive direct table or Storage access.
 
 When Supabase schema, Auth, RLS, Storage, or Edge Functions are involved, apply `secure-hgm-supabase` as part of the work.
 
@@ -56,7 +59,7 @@ Run the repository's proportionate checks, including as applicable:
 - formatting, linting, and strict type checks
 - business-rule unit tests
 - Data API, RLS, Storage, and Edge Function integration tests
-- allowed, unauthenticated, unauthorized, and cross-tenant cases
+- allowed, unauthenticated, unauthorized, wrong-provider, removed-member, MFA, and cross-tenant cases
 - invalid input, dependency failure, and absence of prohibited side effects
 - production build and critical browser journeys
 - keyboard and accessibility checks

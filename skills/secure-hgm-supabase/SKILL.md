@@ -45,10 +45,13 @@ Use the Supabase user ID as stable identity. Never authorize through email suffi
 
 ## Auth, Storage, and functions
 
-- Internal apps use approved Entra SSO through Supabase SAML SSO and stable application membership.
-- Customer apps use the approved Supabase Auth enrollment, verification, recovery, and removal flow.
+- Internal apps use Microsoft Entra SAML SSO only, plus stable application membership. Verify the configured SAML provider and assigned Entra user or group; reject password, passwordless, social, shared-account, email-domain, and unassigned access to internal routes. In combined apps, require SAML provider provenance and membership for internal access even when customer Auth is also enabled.
+- If the approved project or plan cannot support SAML, or Entra metadata and assigned test identities are unavailable, stop with a specific IT or billing handoff. Do not add a fallback provider.
+- Customer apps default to email magic links or one-time codes. Prevent automatic account creation unless self-registration is explicitly approved, and give new accounts no customer-data access until ownership or tenant membership is securely established.
+- Require MFA for sensitive customer data, exports, billing, administration, and other privileged actions. Enforce the required assurance level in restrictive RLS policies or authorized Edge Functions, not only in React.
+- Public apps expose only an approved public projection. Customer, personal, confidential, unpublished, and operational data receive no anonymous read path; anonymous writes use validated and rate-limited Edge Functions.
 - Verify provider enablement separately from public signup, invitation or enrollment, application membership, recovery, SMTP, password policy, and account removal. One enabled control does not prove another.
-- Record every approved architecture or identity exception with its owner, rationale, compensating controls, approval evidence, and review date.
+- Record every approved architecture exception with its owner, rationale, compensating controls, approval evidence, and review date. Internal Entra SAML is not an exception point.
 - Account for stale JWT claims when authorization relies on app metadata.
 - Use private Storage by default and scope object paths to the approved user or tenant relationship.
 - Test Storage creation and replacement separately because upsert requires insert, select, and update access.
@@ -71,6 +74,7 @@ Use the Supabase user ID as stable identity. Never authorize through email suffi
 - Prefer additive, backward-compatible changes and expand-and-contract for destructive work.
 - Test migrations in an isolated target and verify both schema and data behavior.
 - Run allowed and denied queries for every policy and Storage boundary.
+- Test assigned SAML staff, wrong-provider and removed staff, uninvited customers, pre-MFA and verified-MFA sessions, and cross-user or cross-tenant access when relevant.
 - Test functions with valid, invalid, unauthenticated, unauthorized, and dependency-failure requests.
 - Run current Supabase database and security advisors and address relevant findings.
 - Load only the Postgres best-practice rule categories relevant to the change. Prioritize security, query paths, connections, and schema design; require evidence before adding performance complexity.
