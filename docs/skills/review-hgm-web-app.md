@@ -28,6 +28,7 @@ The person or AI that built the app should not be the only source of confidence.
 - the approved workflows are present and unapproved work is absent
 - the app remains the smallest useful, maintainable solution
 - sign-in and data permissions are enforced beyond the screen
+- internal SAML, public-data and customer passwordless/MFA boundaries have allowed and denied evidence
 - preview credentials, data, schedules and integrations are non-production
 - allowed, denied and failure cases were actually observed
 - database changes are compatible and recoverable

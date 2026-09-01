@@ -28,7 +28,7 @@ Determine from supplied context and read-only evidence:
 - accessibility, public discoverability, retention, support, and retirement needs
 - existing systems or patterns that should be reused
 - plain-language safety boundaries: what the AI may change, must protect, must not do, and when it must stop
-- an environment manifest and any approved architecture or identity exceptions, including owner, rationale, compensating controls, and review date
+- an environment manifest and any approved architecture exceptions, including owner, rationale, compensating controls, and review date
 
 Resolve technical facts from the repository before asking the user. Ask only for technical decisions that materially affect architecture, risk, identity, data use, or delivery. Return unresolved product decisions to the product owner without proposing features or alternatives.
 
@@ -39,9 +39,9 @@ Resolve technical facts from the repository before asking the user. Ask only for
 - Apply KISS: prefer the simplest secure design that meets the approved outcome.
 - Require React, TypeScript, TanStack Router, Tailwind, shadcn/ui, Supabase, GitHub, Netlify, and the minimum capabilities needed by the approved outcome.
 - Default to a Vite SPA. Record a rendering exception only for an explicit public indexing or server-rendering need.
-- Require Entra SSO through Supabase SAML SSO for internal users.
-- For public apps, separate public reads from anonymous writes and abuse-sensitive operations.
-- For customer portals, define user ownership or tenant membership that can be enforced with RLS.
+- Require Microsoft Entra SAML SSO and explicit app membership for internal users. Record SAML plan readiness, provider metadata ownership, assigned users or groups, provider verification, and removal. Do not plan a password or email-domain fallback.
+- For public apps, expose only approved public fields and keep customer data out of anonymous reads. Separate public reads from anonymous writes and abuse-sensitive operations.
+- For customer portals, default to passwordless email magic links or one-time codes with automatic account creation disabled unless explicitly approved. Define secure enrollment, user ownership or tenant membership, removal, and the sensitive data or actions that require MFA.
 - Use route guards only for navigation. Put authorization in grants, RLS, Storage policies, and Edge Functions.
 - Default to synthetic data and isolated non-production environments.
 - Do not add optional Supabase services, TanStack Query, a second UI kit, or another platform without a current requirement.

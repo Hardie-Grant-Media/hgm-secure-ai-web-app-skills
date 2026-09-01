@@ -37,6 +37,7 @@ If product requirements are missing or unresolved, the skill stops rather than d
 
 - the app remains the smallest useful version of the approved requirements
 - local, test, preview and production environments remain separate
+- internal staff use Entra SAML plus app membership, public access excludes customer data, and customer access uses passwordless login with MFA where required
 - sign-in is not mistaken for permission to see or change data
 - secrets and privileged work remain outside the browser
 - a successful command, dashboard visit or screenshot is not treated as proof

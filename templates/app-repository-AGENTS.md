@@ -39,6 +39,10 @@ If the technical brief is missing, unapproved, ambiguous, or conflicts with thes
 - Use the Supabase user ID and approved membership records as stable identity.
 - Never authorize with an email suffix, shared account, client-provided role, `user_metadata`, or `raw_user_meta_data`.
 - `TO authenticated` alone is not authorization. Include the required ownership, membership, or permission predicate.
+- Internal routes require Microsoft Entra SAML SSO provider provenance plus active app membership. Do not add another staff login method.
+- Customer portals default to passwordless email with automatic account creation disabled unless approved. Verified email alone grants no customer-data access.
+- Enforce required MFA for sensitive customer data or privileged actions in restrictive RLS policies or Edge Functions.
+- Anonymous reads expose approved public fields only and never customer data. Anonymous writes use validated, rate-limited Edge Functions.
 - Test allowed and denied behavior directly at every protected boundary.
 
 ## Supabase and secrets

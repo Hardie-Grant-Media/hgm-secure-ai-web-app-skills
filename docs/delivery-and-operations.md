@@ -35,7 +35,7 @@ One person may hold more than one role where HGM permits it, but AI cannot be th
 
 The exact Supabase and Netlify target must be visible before migrations, function deployment, seed, restore, or release commands run.
 
-Record an environment manifest containing the repository, branch, exact environment and Supabase target, MCP mode, Auth and signup state, schedule state, external side-effect state, and evidence owner. Record approved architecture or identity exceptions with their owner, rationale, compensating controls, approval evidence, and review date.
+Record an environment manifest containing the repository, branch, exact environment and Supabase target, MCP mode, Auth and signup state, schedule state, external side-effect state, and evidence owner. Record approved architecture exceptions with their owner, rationale, compensating controls, approval evidence, and review date. Internal Entra SAML is not an exception point.
 
 ## Staging proof within Build
 

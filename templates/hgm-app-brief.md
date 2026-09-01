@@ -54,15 +54,18 @@ Complete this brief only after product requirements are approved. It records tec
 ## 6. Identity and permissions
 
 - Authentication method:
+- Required identity provider and how it is verified:
+- Public-signup and automatic-account-creation state:
 - Enrollment or invitation process:
 - Account recovery process:
+- MFA requirement and protected data or actions:
 - Session or removal requirements:
 
 | Role or relationship | Resource | Allowed actions | Explicitly denied actions | Approver |
 | --- | --- | --- | --- | --- |
 |  |  |  |  |  |
 
-For internal apps, record the approved Entra tenant and group or application role. For customer portals, record ownership or tenant-membership rules. Do not use an email suffix as authorization.
+For internal apps, record the approved Entra tenant, SAML provider, assigned group or users, plan readiness, and app membership source. No other staff login is permitted. For customer portals, record the selected passwordless method, ownership or tenant-membership rules, and MFA boundary. Do not use an email suffix or verified email alone as authorization.
 
 ## 7. Supabase design
 
@@ -155,7 +158,7 @@ Complete this before any non-production mutation. Do not record secret values.
 - Exact local, preview, or staging environment:
 - Exact Supabase target:
 - Supabase MCP mode and enabled feature groups:
-- Auth provider and public-signup state:
+- Auth provider, provider verification, public-signup, automatic-account-creation, and MFA state:
 - Schedule state:
 - External side effects and their enabled or disabled state:
 - Evidence owner:
@@ -174,7 +177,7 @@ Complete this before any non-production mutation. Do not record secret values.
 | --- | --- | --- | --- |
 |  |  |  |  |
 
-Include at minimum unauthenticated access, authenticated-but-unauthorized access, cross-user or cross-tenant access where relevant, invalid input, dependency failure, and absence of prohibited side effects.
+Include at minimum unauthenticated access, authenticated-but-unauthorized access, wrong-provider access, uninvited or removed users, pre-MFA access to protected actions, cross-user or cross-tenant access where relevant, invalid input, dependency failure, and absence of prohibited side effects.
 
 ## 12. Operations
 
@@ -195,7 +198,7 @@ Include at minimum unauthenticated access, authenticated-but-unauthorized access
 
 ### Exception register
 
-Record every approved deviation from the architecture, identity, security, or delivery baseline. `None` is a valid answer.
+Record every approved deviation from the architecture, external identity, security, or delivery baseline. Internal Entra SAML is not an exception point. `None` is a valid answer.
 
 | Exception | Owner | Rationale | Compensating controls | Approval evidence | Review date |
 | --- | --- | --- | --- | --- | --- |

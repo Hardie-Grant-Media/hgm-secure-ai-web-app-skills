@@ -46,9 +46,13 @@ const boundaries = [
 ] as const
 
 const profiles = [
-  ["HGM staff", "Staff sign-in with named access", Building2],
-  ["Everyone", "Only approved information is public", Globe2],
-  ["Customers", "Each customer sees only their own data", UsersRound],
+  ["HGM staff", "Microsoft work account through Entra SSO", Building2],
+  ["Public", "Approved public information only; never customer data", Globe2],
+  [
+    "Customers",
+    "Passwordless sign-in, MFA for sensitive access, and only their data",
+    UsersRound,
+  ],
 ] as const
 
 const techStack = [

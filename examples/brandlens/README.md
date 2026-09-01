@@ -54,4 +54,6 @@ Sentiment remains an AI assessment, not an objective fact or exhaustive media-mo
 
 The web interface is deployed on Netlify. Netlify's GitHub integration automatically builds and deploys approved changes from the deployment branch.
 
+Brandlens predates the current Entra SAML baseline. Its workflow remains a useful example, but its sign-in must not be copied as the HGM internal-app standard and must use Entra SAML before production access review can pass.
+
 Independent review and approval of the daily monitoring schedule remain separate human controls. The public-web and AI-assessment limitations also remain visible in the app.
