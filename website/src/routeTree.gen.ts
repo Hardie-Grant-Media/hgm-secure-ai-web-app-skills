@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ExamplesBrandlensRouteImport } from './routes/examples.brandlens'
+import { Route as PrinciplesNegativeSpaceProgrammingRouteImport } from './routes/principles.negative-space-programming'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,31 +23,46 @@ const ExamplesBrandlensRoute = ExamplesBrandlensRouteImport.update({
   path: '/examples/brandlens',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PrinciplesNegativeSpaceProgrammingRoute =
+  PrinciplesNegativeSpaceProgrammingRouteImport.update({
+    id: '/principles/negative-space-programming',
+    path: '/principles/negative-space-programming',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/examples/brandlens': typeof ExamplesBrandlensRoute
+  '/principles/negative-space-programming': typeof PrinciplesNegativeSpaceProgrammingRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/examples/brandlens': typeof ExamplesBrandlensRoute
+  '/principles/negative-space-programming': typeof PrinciplesNegativeSpaceProgrammingRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/examples/brandlens': typeof ExamplesBrandlensRoute
+  '/principles/negative-space-programming': typeof PrinciplesNegativeSpaceProgrammingRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/examples/brandlens'
+  fullPaths:
+    '/' | '/examples/brandlens' | '/principles/negative-space-programming'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/examples/brandlens'
-  id: '__root__' | '/' | '/examples/brandlens'
+  to: '/' | '/examples/brandlens' | '/principles/negative-space-programming'
+  id:
+    | '__root__'
+    | '/'
+    | '/examples/brandlens'
+    | '/principles/negative-space-programming'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ExamplesBrandlensRoute: typeof ExamplesBrandlensRoute
+  PrinciplesNegativeSpaceProgrammingRoute: typeof PrinciplesNegativeSpaceProgrammingRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +81,21 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ExamplesBrandlensRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/principles/negative-space-programming': {
+      id: '/principles/negative-space-programming'
+      path: '/principles/negative-space-programming'
+      fullPath: '/principles/negative-space-programming'
+      preLoaderRoute: typeof PrinciplesNegativeSpaceProgrammingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ExamplesBrandlensRoute: ExamplesBrandlensRoute,
+  PrinciplesNegativeSpaceProgrammingRoute:
+    PrinciplesNegativeSpaceProgrammingRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

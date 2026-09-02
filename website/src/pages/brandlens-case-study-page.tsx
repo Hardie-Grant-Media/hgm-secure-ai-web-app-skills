@@ -31,14 +31,14 @@ const developmentSteps = [
     number: "01",
     title: "People set the brief",
     description:
-      "HGM approved the audience, essential features, data boundaries and success measures before any build work began.",
+      "HGM defined the audience, essential features, data boundaries and success measures before build work began.",
     icon: ShieldCheck,
   },
   {
     number: "02",
     title: "AI planned the build",
     description:
-      "The HGM web-app skills helped AI turn the brief into a practical plan for access, data, testing and approval points.",
+      "The HGM web-app skills helped AI turn the brief into a practical plan for access, data, testing and stop points.",
     icon: Bot,
   },
   {
@@ -52,7 +52,7 @@ const developmentSteps = [
     number: "04",
     title: "People reviewed the evidence",
     description:
-      "Automated checks, database readback and a real browser proved the important journeys before approved changes deployed through Netlify.",
+      "Automated checks, database readback and a real browser proved the important journeys before changes deployed through Netlify.",
     icon: SearchCheck,
   },
 ] as const
@@ -94,7 +94,7 @@ const deliveryControls = [
   {
     title: "Human decisions",
     description:
-      "People approved the product, access model, deployment and whether automated daily monitoring could be activated.",
+      "People set the product, access model, deployment path and whether automated daily monitoring could be activated.",
     icon: CirclePause,
   },
 ] as const
@@ -192,8 +192,8 @@ export function BrandlensCaseStudyPage() {
             </h1>
             <p className="mt-5 max-w-3xl text-lg leading-8 text-muted-foreground">
               Brandlens tracks how brands are discussed online. This case study
-              shows HGM teams how an approved idea became a working app with AI
-              while people retained control of scope, access and release.
+              shows HGM teams how an idea became a working app with AI while
+              people retained control of scope, access and release.
             </p>
             <div
               className="mt-6 flex flex-wrap gap-2"
@@ -269,7 +269,7 @@ export function BrandlensCaseStudyPage() {
                 </h2>
                 <p className="mt-2 max-w-3xl text-muted-foreground">
                   AI accelerated the technical work. It did not decide the
-                  product or approve its own release.
+                  product or deploy production changes by itself.
                 </p>
               </div>
               <ol
@@ -312,8 +312,8 @@ export function BrandlensCaseStudyPage() {
                 How guidance and access worked
               </h2>
               <p className="mt-2 text-muted-foreground">
-                The guidance, development connection and approval decisions had
-                separate jobs. None of them replaced the others.
+                The guidance, development connection and deployment decisions
+                had separate jobs. None of them replaced the others.
               </p>
             </div>
             <div className="grid gap-4 md:grid-cols-3">
@@ -406,7 +406,7 @@ export function BrandlensCaseStudyPage() {
               <CardContent>
                 <ul className="flex flex-col gap-3 text-sm">
                   <li>Complete an independent review.</li>
-                  <li>Approve the daily schedule before activation.</li>
+                  <li>Confirm the daily schedule before activation.</li>
                   <li>
                     Keep the public-web and AI-assessment limitations visible.
                   </li>

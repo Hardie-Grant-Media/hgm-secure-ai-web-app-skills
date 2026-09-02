@@ -34,7 +34,7 @@ const skillFlow = [
   ["Provide requirements", "Approved features, users, and data", BookOpenCheck],
   ["Plan the build", "Routes, access, and environments", ShieldCheck],
   ["Build + secure", "Simple preview with access tests", Code2],
-  ["Review + handoff", "A human decides release", SearchCheck],
+  ["Review + publish", "Check the app, then deploy it", SearchCheck],
 ] as const
 
 const boundaries = [
@@ -132,6 +132,9 @@ Use your built-in skill installer. Install only skills/hgm-web-app and confirm i
             <a href="#profiles">Access</a>
             <a href="#boundaries">AI rules</a>
             <a href="#technical">Technical</a>
+            <Link to="/principles/negative-space-programming">
+              Negative space
+            </Link>
             <Link to="/examples/brandlens">Brandlens example</Link>
           </nav>
           <Button asChild size="sm" variant="ghost">
@@ -169,6 +172,12 @@ Use your built-in skill installer. Install only skills/hgm-web-app and confirm i
                   <Download data-icon="inline-start" />
                   Download skill
                 </a>
+              </Button>
+              <Button asChild size="lg" variant="ghost">
+                <Link to="/principles/negative-space-programming">
+                  Understand the safety principles
+                  <ArrowRight data-icon="inline-end" />
+                </Link>
               </Button>
               <Button asChild size="lg" variant="ghost">
                 <Link to="/examples/brandlens">
