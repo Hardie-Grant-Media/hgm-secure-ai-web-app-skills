@@ -88,10 +88,10 @@ export function WorkflowPage() {
   const [copyStatus, setCopyStatus] = useState<"idle" | "copied" | "failed">(
     "idle"
   )
-  const installPrompt = `Install the HGM master web-app skill from:
-${repositoryUrl}/tree/main/skills/hgm-web-app
+  const installPrompt = `Install all HGM web-app skills from:
+${repositoryUrl}/tree/main/skills
 
-Use your built-in skill installer. Install only skills/hgm-web-app and confirm it is available on the next turn. Do not start app work.`
+Use your built-in skill installer. Install every skill in the skills folder and confirm they are available on the next turn. Do not start app work.`
 
   async function copyInstallPrompt() {
     try {
@@ -244,10 +244,10 @@ Use your built-in skill installer. Install only skills/hgm-web-app and confirm i
             />
             <Card>
               <CardHeader>
-                <CardTitle>Install the master skill</CardTitle>
+                <CardTitle>Install all skills</CardTitle>
                 <CardDescription>
-                  This installs the technical workflow. It does not start an
-                  app.
+                  This installs the complete technical workflow. It does not
+                  start an app.
                 </CardDescription>
               </CardHeader>
               <CardContent className="flex flex-col gap-4">
